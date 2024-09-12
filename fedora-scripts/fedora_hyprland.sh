@@ -20,6 +20,7 @@ sudo dnf5 makecache
 echo "@CORE"
 sleep 5
 sudo dnf5 install \
+  dnf-automatic \
   cargo \
   copr-selinux \
   dnf-plugins-core \
@@ -106,6 +107,7 @@ sudo dnf5 install \
   emacs \
   file-roller \
   firefox \
+  ranger \
   thunar \
   thunar-volman \
   thunar-media-tags-plugin \
