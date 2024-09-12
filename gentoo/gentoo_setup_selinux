@@ -1,14 +1,14 @@
 #!/bin/bash
 
 ##.1
-cfdisk /dev/nvme0n1 && 
-  mkfs.vfat -F 32 /dev/nvme0n1p1 && 
-  cryptsetup luksFormat --key-size 512 /dev/nvme0n1p2 && 
-  cryptsetup luksOpen /dev/nvme0n1p2 root && 
-  mkfs.btrfs -L rootfs /dev/mapper/root && 
-  rm -R /mnt/gentoo && 
-  mkdir /mnt/gentoo && 
-  mount /dev/mapper/root /mnt/gentoo 
+cfdisk /dev/nvme0n1 &&
+  mkfs.vfat -F 32 /dev/nvme0n1p1 &&
+  cryptsetup luksFormat --key-size 512 /dev/nvme0n1p2 &&
+  cryptsetup luksOpen /dev/nvme0n1p2 root &&
+  mkfs.btrfs -L rootfs /dev/mapper/root &&
+  rm -R /mnt/gentoo &&
+  mkdir /mnt/gentoo &&
+  mount /dev/mapper/root /mnt/gentoo
 
 btrfs su cr /mnt/gentoo/@ &&
   btrfs su cr /mnt/gentoo/@home &&
@@ -20,7 +20,7 @@ btrfs su cr /mnt/gentoo/@ &&
   btrfs su cr /mnt/gentoo/@var@cache && 
   btrfs su cr /mnt/gentoo/@var@crash &&
   btrfs su cr /mnt/gentoo/@var@log && 
-  btrfs su cr /mnt/gentoo/@var@log@audit && 
+  btrfs su cr /mnt/gentoo/@var@log@audit &&
   btrfs su cr /mnt/gentoo/@var@tmp &&
   btrfs su cr /mnt/gentoo/@snapshots && 
   umount /mnt/gentoo 
@@ -53,7 +53,7 @@ mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper
   mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/root /mnt/gentoo/.snapshots  
   
 
-cd /mnt/gentoo && wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20240825T170406Z/stage3-amd64-hardened-selinux-openrc-20240825T170406Z.tar.xz && tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner &&
+cd /mnt/gentoo && wget https://distfiles.gentoo.org/releases/amd64/autobuilds/20240908T164942Z/stage3-amd64-desktop-systemd-20240908T164942Z.tar.xz && tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner &&
   rm -R /mnt/gentoo/etc/portage/make.conf &&
   cp -R /home/ahsan/.dots/gentoo/etc/portage/make.conf /mnt/gentoo/etc/portage/ && 
   rm -R /mnt/gentoo/etc/portage/package.accept_keywords && 

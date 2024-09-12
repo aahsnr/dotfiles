@@ -267,8 +267,16 @@ sudo systemctl enable supergfxd.service power-profiles-daemon
 echo "@AGS"
 sudo dnf5 install typescript npm meson gjs-devel gtk3-devel gtk-layer-shell gnome-bluetooth upower NetworkManager pulseaudio-libs-devel libdbusmenu-gtk3 libsoup3
 sudo dnf5 install libgtop2-devel swww brightnessctl
-sudo dnf5 builddep aylurs-gtk-shell
-sudo dnf5 install aylurs-gtk-shell
+sudo dnf5 builddep aylurs-gtk-shell-git
+sudo dnf5 install aylurs-gtk-shell-git
+
+echo "@fonts"
+sudo mkdir -p /usr/local/share/fonts/nerd
+sudo cp $HOME/.dots/.fonts/* /usr/local/share/fonts/nerd/
+sudo chown -R root: /usr/local/share/fonts/nerd
+sudo chmod 644 /usr/local/share/fonts/nerd/*
+sudo restorecon -vFr /usr/local/share/fonts/nerd
+sudo fc-cache -v
 
 echo "@BASHSCRIPTS"
 sleep 5
