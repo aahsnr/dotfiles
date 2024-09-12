@@ -53,7 +53,7 @@ sudo dnf5 install \
   python3-setuptools \
   rust \
   util-linux-user \
-  fzf
+  fzf 
 
 sudo plymouth-set-default-theme spinner -R
 
@@ -105,15 +105,13 @@ sudo dnf5 install \
   deluge \
   emacs \
   file-roller \
-  firefox
+  firefox \
   thunar \
   thunar-volman \
   thunar-media-tags-plugin \
   thunar-archive-plugin \
   tumbler \
-  timeshift \
   kitty \
-  xournalpp \
   zathura \
   zathura-zsh-completion \
   zathura-pdf-poppler 
@@ -131,7 +129,7 @@ sudo dnf5 install \
 
 echo "@DRIVERS"
 sleep 5
-sudo dnf remove \
+sudo dnf5 install \
   akmod-nvidia \
   xorg-x11-drv-nvidia-cuda \
   xorg-x11-drv-nvidia-power \
@@ -147,10 +145,10 @@ sudo dnf remove \
   openssl
 
 sudo dnf mark install akmod-nvidia
-sudo kmodgenca -a
-sudo mokutil --import /etc/pki/akmods/certs/public_key.der
-sudo systemctl enable nvidia-suspend.service nvidia-resume.service
-sudo grubby --update-kernel=ALL --args='nvidia-drm.modeset=1'
+#sudo kmodgenca -a
+#sudo mokutil --import /etc/pki/akmods/certs/public_key.der
+#sudo systemctl enable nvidia-suspend.service nvidia-resume.service
+#sudo grubby --update-kernel=ALL --args='nvidia-drm.modeset=1'
 
 
 echo "@C-DEVELOPMENT"
@@ -342,5 +340,5 @@ sleep 5
 sudo cp -R ~/.dots/variables.sh /etc/profile.d/
 git config --global user.name "zielOS"
 git config --global user.email "ahsanur041@gmail.com"
-git config --global credential.helper /usr/libexec/git-core/git-credential-libsecret
+#git config --global credential.helper /usr/libexec/git-core/git-credential-libsecret
 
