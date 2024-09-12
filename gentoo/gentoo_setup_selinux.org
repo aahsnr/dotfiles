@@ -1,0 +1,544 @@
+
+* Setup Disk
+
+#+begin_src bash
+cfdisk /dev/nvme1n1 && mkfs.vfat -F 32 /dev/nvme1n1p1 && cryptsetup --cipher aes-xts-plain64 --hash sha512 --use-random --verify-passphrase luksFormat /dev/nvme1n1p2 && cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme1n1p2 root && mkfs.btrfs /dev/mapper/root && rm -R /mnt/gentoo && mkdir /mnt/gentoo && mount /dev/mapper/root /mnt/gentoo && btrfs subvolume create /mnt/gentoo/@ && btrfs subvolume create /mnt/gentoo/@/home && btrfs subvolume create /mnt/gentoo/@/opt && btrfs subvolume create /mnt/gentoo/@/var && btrfs subvolume create /mnt/gentoo/@/var/tmp && btrfs subvolume create /mnt/gentoo/@/var/log && btrfs subvolume create /mnt/gentoo/@/var/log/audit && btrfs subvolume create /mnt/gentoo/@/.snapshots && chattr +C /mnt/gentoo/@/var && umount /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/ /dev/mapper/root /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/home /dev/mapper/root /mnt/gentoo/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/opt /dev/mapper/root /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var /dev/mapper/root /mnt/gentoo/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/tmp /dev/mapper/root /mnt/gentoo/var/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/log /dev/mapper/root /mnt/gentoo/var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/var/log/audit /dev/mapper/root /mnt/gentoo/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@/.snapshots /dev/mapper/root /mnt/gentoo/.snapshots && cd /mnt/gentoo && wget  https://distfiles.gentoo.org/releases/amd64/autobuilds/20240707T170407Z/stage3-amd64-desktop-systemd-20240707T170407Z.tar.xz && tar xpvf stage3-*.tar.xz --xattrs-include='*.*' --numeric-owner && rm -R /mnt/gentoo/etc/portage/make.conf && cp -R /home/ahsan/.dots/gentoo/etc/portage/make.conf /mnt/gentoo/etc/portage/ && rm -R /mnt/gentoo/etc/portage/package.accept_keywords && cp -R /home/ahsan/.dots/gentoo/etc/portage/package.accept_keywords /mnt/gentoo/etc/portage/ && cp -R /home/ahsan/.dots/gentoo/etc/portage/profile/use.mask /mnt/gentoo/etc/portage/profile/ && cp -R /home/ahsan/.dots/gentoo/etc/portage/profile/package.provided /mnt/gentoo/etc/portage/profile/ && rm -R /mnt/gentoo/etc/portage/package.use && cp -R /home/ahsan/.dots/gentoo/etc/portage/package.use /mnt/gentoo/etc/portage/ && rm -R /mnt/gentoo/etc/portage/package.mask && cp -R /home/ahsan/.dots/gentoo/etc/portage/package.mask /mnt/gentoo/etc/portage/ && mkdir --parents /mnt/gentoo/etc/portage/repos.conf && cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf && cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ && mount --types proc /proc /mnt/gentoo/proc && mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys && mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev && mount --bind /run /mnt/gentoo/run && mount --make-slave /mnt/gentoo/run && test -L /dev/shm && rm /dev/shm && mkdir /dev/shm && mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm && chmod 1777 /dev/shm
+
+#+end_src
+
+* Chroot into
+
+#+begin_src bash
+chroot /mnt/gentoo /bin/bash
+source /etc/profile
+export PS1="(chroot) ${PS1}"
+#+end_src
+
+* Sync Setup
+
+#+begin_src bash
+emerge-webrsync && emerge --sync
+eselect profile set 44
+#+end_src
+
+* GCC Setup
+
+#+begin_src bash
+emerge gcc && eselect gcc list && eselect gcc set 2  && env-update && source /etc/profile && export PS1="(chroot) ${PS1}" && emerge --ask --oneshot --usepkg=n dev-build/libtool && emerge --unmerge sys-apps/systemd-utils virtual/tmpfiles dev-lang/perl virtual/perl-MIME-Base64 virtual/perl-Time-Local virtual/perl-Scalar-List-Utils virtual/perl-Math-Complex virtual/perl-Carp dev-perl/XS-Parse-Keyword virtual/perl-Data-Dumper virtual/perl-Exporter virtual/perl-Test-Harness virtual/perl-emerge --unmerge sys-apps/systemd-utils virtual/tmpfiles dev-lang/perl virtual/perl-MIME-Base64 virtual/perl-Time-Local virtual/perl-Scalar-List-Utils virtual/perl-Math-Complex virtual/perl-Carp dev-perl/XS-Parse-Keyword virtual/perl-Data-Dumper virtual/perl-Exporter virtual/perl-Test-Harness virtual/perl-ExtUtils-CBuilder virtual/perl-JSON-PP virtual/perl-ExtUtils-ParseXS perl-core/File-Temp virtual/perl-GetoExtUtils-CBuilder virtual/perl-JSON-PP virtual/perl-ExtUtils-ParseXS perl-core/File-Temp virtual/perl-Getopt-Long
+virtual/perl-File-Temp virtual/perl-Math-BigInt perl-core/Math-BigInt virtual/perl-CPAN virtual/perl-Encode
+
+#+end_src
+
+* Local Profile
+
+#+begin_src bash
+ln -sf ../usr/share/zoneinfo/Asia/Dhaka /etc/localtime && nano -w /etc/locale.gen && locale-gen && eselect locale list && eselect locale set 4 && env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
+
+#+end_src
+
+* Repo Setup
+
+#+begin_src bash
+emerge -aq app-eselect/eselect-repository dev-vcs/git && eselect repository remove gentoo && eselect repository add gentoo git https://github.com/gentoo-mirror/gentoo.git  && emaint sync -r gentoo && eselect repository enable guru gentoo-zh xira steam-overlay ppfeufer-gentoo-overlay CachyOS-kernels xarblu-overlay && emerge --sync
+
+#+end_src
+
+* fstab setup
+
+#+begin_src bash
+emerge genfstab && mount /dev/nvme1n1p1 /boot && genfstab -U / >> /etc/fstab
+
+#+end_src
+
+* MANUAL KERNEL SETUP
+
+** Kernel Setup
+
+*** Packages
+
+#+begin_src bash
+emerge sys-kernel/cachyos-sources sys-kernel/linux-firmware sys-kernel/linux-headers sys-apps/fwupd sys-fs/cryptsetup sys-firmware/intel-microcode sys-kernel/dracut sys-kernel/installkernel sys-kernel/modprobed-db sys-fs/btrfs-progs sys-apps/rng-tools && eselect kernel set 1 && ls -l /usr/src/linux
+
+#+end_src
+
+*** Gentoo Config Examples
+
+#+begin_src bash
+1. main handbook (done)
+2. dracut (done)
+3. systemd (done)
+4. zram (done)
+5. printing
+6. systemd-boot
+7. zstd (done)
+8. bluetooth (done)
+9. dm-crypt (done)
+10. intel microcode (done)
+11. input devices
+12. cups (done)
+13. droidcam (done)
+14. nvidia
+15. sound
+16. openrgb
+
+for cachyos kernel check droidcam and openrgb support
+#+end_src
+
+*** Configure Kernel
+
+#+begin_src bash
+# cp gentoo-sample to /usr/src/linux
+make nconfig
+#+end_src
+
+*** Install Kernel
+
+#+begin_src bash
+LLVM=1 LLVM_IAS=1 KCFLAGS="-O2 -march=native -pipe" make -j22 && make modules_install -j22 && emerge nvidia-drivers && make install
+#+end_src
+
+
+** Dracut Setup
+
+*** UUID
+
+#+begin_src bash
+lsblk -o name,uuid
+
+nvme0n1
+├─nvme0n1p1   2433-FFEA
+└─nvme0n1p2   bdceacd3-014b-42bb-ba8e-c6985f9e5446
+  └─cryptroot 90a93a8d-9322-40ec-8076-18766c5f1d89
+#+end_src
+
+*** dracut config
+**** systemd-boot
+
+#+begin_src bash
+nvim /etc/dracut.conf
+
+compress="zstd"
+hostonly="yes"
+dracut_rescue_image="yes"
+dracutmodules+=" kernel-modules rootfs-block udev-rules usrmount base fs-lib shutdown "
+add_dracutmodules+=" crypt dm rootfs-block rngd "
+omit_dracutmodules+=" network cifs nfs nbd brltty "
+force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
+kernel_cmdline+=" rd.luks.uuid=bdceacd3-014b-42bb-ba8e-c6985f9e5446 root=UUID=90a93a8d-9322-40ec-8076-18766c5f1d89 rd.luks.allow-discards=bdceacd3-014b-42bb-ba8e-c6985f9e5446 init=/lib/systemd/systemd nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw root_trim=yes loglevel=3 quiet "
+#install_items+=" /etc/crypttab "
+#+end_src
+
+*** crypttab setup
+
+#+begin_src bash
+nvim /etc/crypttab
+
+root UUID=38de55c7-1bac-4606-b417-1514e2b39b26     none luks
+#+end_src
+
+**** grub
+#+begin_src bash
+nvim /etc/dracut.conf
+
+compress="zstd"
+hostonly="yes"
+dracut_rescue_image="yes"
+dracutmodules+=" kernel-modules rootfs-block udev-rules usrmount base fs-lib shutdown "
+add_dracutmodules+=" crypt dm rootfs-block rngd "
+omit_dracutmodules+=" network cifs nfs nbd brltty "
+force_drivers+=" btrfs nvidia nvidia_modeset nvidia_uvm nvidia_drm "
+kernel_cmdline+=" crypt_root=d7b31b84-531e-46bb-b4e2-b721bee16fe6 init=/lib/systemd/systemd nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw root_trim=yes loglevel=3 quiet "
+install_items+=" /etc/crypttab /crypto_keyfile.bin "
+
+#+end_src
+
+*** crypttab setup
+
+#+begin_src bash
+nvim /etc/crypttab
+
+root UUID=d7b31b84-531e-46bb-b4e2-b721bee16fe6     /crypto_keyfile.bin luks
+#+end_src
+
+** Boot Setup
+*** install systemd-boot
+
+#+begin_src
+bootctl install
+#+end_src
+
+*** machine-id
+
+#+begin_src
+e299e8fff8bb6a5c1404cd4966953e20
+#+end_src
+
+*** esp/loader/loader.conf
+
+#+begin_src bashde
+default e299e8fff8bb6a5c1404cd4966953e20*
+timeout 4
+console-mode keep
+editor no
+reboot-for-bitlocker 1
+#+end_src
+
+*** esp/loader/entries/*.conf
+
+#+begin_src bash
+e299e8fff8bb6a5c1404cd4966953e20
+50b58c553cb0b8eecdd454456691d176
+#+end_src
+
+#+begin_src bash
+# Boot Loader Specification type#1 entry
+# File created by /usr/lib/kernel/install.d/90-loaderentry.install (systemd 256)
+title      Gentoo Linux
+version    6.9.9-cachyos-6.9.9
+machine-id e299e8fff8bb6a5c1404cd4966953e20
+sort-key   gentoo
+options    rd.luks.uuid=b155e0a2-cff4-47b8-8ffa-8aa8d853a2f0 root=UUID=226ad46f-a372-4a21-b72b-a07a19bbe634 rd.luks.allow-discards= b155e0a2-cff4-47b8-8ffa-8aa8d853a2f0 rw rootflags=subvol=/@ rootfstype=btrfs root_trim=yes loglevel=3 quiet init=/lib/systemd/systemd nvidia-drm.modeset=1 apparmor=1 security=apparmor systemd.machine_id=e299e8fff8bb6a5c1404cd4966953e20
+linux      /e299e8fff8bb6a5c1404cd4966953e20/6.9.9-cachyos-6.9.9/linux
+initrd     /e299e8fff8bb6a5c1404cd4966953e20/6.9.9-cachyos-6.9.9/microcode-amd
+initrd     /e299e8fff8bb6a5c1404cd4966953e20/6.9.9-cachyos-6.9.9/microcode-intel
+initrd     /e299e8fff8bb6a5c1404cd4966953e20/6.9.9-cachyos-6.9.9/initrd
+
+#+end_src
+
+#+RESULTS:
+
+
+* Genkernel method
+
+#+begin_src bash
+# =========COMMON COMMAND LINE OPTION DEFAULTS=========
+
+#INSTALL="yes"
+#OLDCONFIG="yes"
+#MENUCONFIG="no"
+#GCONFIG="no"
+NCONFIG="yes"
+#XCONFIG="no"
+#MRPROPER="yes"
+#CLEAN="yes"
+#MOUNTBOOT="yes"
+#SYMLINK="no"
+#SAVE_CONFIG="yes"
+NOCOLOR="true"
+#CLEAR_CACHEDIR="no"
+#POSTCLEAR="no"
+#CHECK_FREE_DISK_SPACE_BOOTDIR=0
+#CHECK_FREE_DISK_SPACE_KERNELOUTPUTDIR=0
+#NICE=10
+#BCACHE="no"
+#LVM="no"
+LUKS="yes"
+#GPG="no"
+#KEYCTL="no"
+MICROCODE="intel"
+#MICROCODE_INITRAMFS="no"
+#NFS="no"
+#DMRAID="no"
+#SSH="no"
+#B2SUM="no"
+#BUSYBOX="yes"
+#MDADM="no"
+#MDADM_CONFIG="/etc/mdadm.conf"
+#MULTIPATH="no"
+#ISCSI="no"
+#E2FSPROGS="no"
+#UNIONFS="no"
+#ZFS="no"
+BTRFS="yes"
+#XFSPROGS="no"
+#FIRMWARE_INSTALL="no"
+#ALLFIRMWARE="no"
+#FIRMWARE="no"
+#FIRMWARE_DIR="/lib/firmware"
+#FIRMWARE_FILES=""
+#BOOTLOADER="no"
+SANDBOX="yes"
+#BOOTFONT="none"
+#SPLASH="no"
+#SPLASH_THEME="gentoo"
+#PLYMOUTH="no"
+#PLYMOUTH_THEME="text"
+MODULEREBUILD="yes"
+
+#CMD_CALLBACK=""
+
+
+# =========Keymap Settings=========
+# Force keymap selection at boot
+# Enables keymap selection support
+#DOKEYMAPAUTO="no"
+#KEYMAP="yes"
+
+
+# =========Low Level Compile Settings=========
+# Additional make options
+MAKEOPTS="LLVM=1 LLVM_IAS=1 ${MAKEOPTS}"
+
+# Assembler to use for the kernel. See also the --kernel-as command line option.
+# Archiver to use for the kernel. See also the --kernel-ar command line option.
+# Compiler to use for the kernel (e.g. distcc). See also the --kernel-cc command line option.
+# Linker to use for the kernel. See also the --kernel-ld command line option.
+# NM utility to use for the kernel. See also the --kernel-nm command line option.
+# GNU Make to use for kernel. See also the --kernel-make command line option.
+# not exposed in default config
+KERNEL_AS="clang -c"
+KERNEL_AR="llvm-ar"
+KERNEL_CC="clang"
+KERNEL_LD="ld.lld"
+KERNEL_NM="llvm-nm"
+#KERNEL_MAKE="make"
+KERNEL_OBJCOPY="llvm-objcopy"
+KERNEL_OBJDUMP="llvm-objdump"
+KERNEL_READELF="llvm-readelf"
+KERNEL_STRIP="llvm-strip"
+KERNEL_RANLIB="llvm-ranlib"
+
+# Assembler to use for the utilities. See also the --utils-as command line option.
+# Archiver to use for the utilities. See also the --utils-ar command line option.
+# C Compiler to use for the utilities (e.g. distcc). See also the --utils-cc command line option.
+# C++ Compiler to use for the utilities (e.g. distcc). See also the --utils-cxx command line option.
+# Linker to use for the utilities. See also the --utils-ld command line option.
+# NM utility to use for the utilities. See also the --utils-nm command line option.
+# GNU Make to use for the utilities. See also the --utils-make command line option.
+# not exposed in default config
+UTILS_AS="clang -c"
+UTILS_AR="llvm-ar"
+UTILS_CC="clang"
+UTILS_CXX="clang++"
+UTILS_LD="ld.lld"
+UTILS_NM="llvm-nm"
+#UTILS_MAKE="make"
+UTILS_OBJCOPY="llvm-objcopy"
+UTILS_OBJDUMP="llvm-objdump"
+UTILS_READELF="llvm-readelf"
+UTILS_STRIP="llvm-strip"
+UTILS_RANLIB="llvm-ranlib"
+
+# Target triple (i.e. aarch64-linux-gnu) to build for. If you do not
+# cross-compile, leave blank for auto detection.
+#CROSS_COMPILE=""
+
+# Override default make target (bzImage). See also the --kernel-target
+# command line option. Useful to build a uImage on arm.
+#KERNEL_MAKE_DIRECTIVE_OVERRIDE="fooImage"
+
+# Override default kernel binary path. See also the --kernel-binary
+# command line option. Useful to install a uImage on arm.
+#KERNEL_BINARY_OVERRIDE="arch/foo/boot/b
+
+#+end_src
+
+#+RESULTS:
+
+#+begin_src bash
+# copy kernel config and genkernel.conf
+genkernel --luks --microcode=intel --install all --kernel-config=/usr/src/linux/kernel.config
+
+#+end_src
+
+* GRUB
+
+#+begin_src bash
+nvim /etc/default/grub
+GRUB_CMDLINE_LINUX_DEFAULT="rd.luks.uuid=bdceacd3-014b-42bb-ba8e-c6985f9e5446 root=UUID=90a93a8d-9322-40ec-8076-18766c5f1d89 rd.luks.allow-discards=bdceacd3-014b-42bb-ba8e-c6985f9e5446 init=/lib/systemd/systemd nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw root_trim=yes loglevel=3 quiet"
+GRUB_CMDLINE_LINUX=""
+
+
+grub-install --target=x86_64-efi --efi-directory=/boot && grub-install --target=x86_64-efi --efi-directory=/boot --removable && grub-mkconfig -o /boot/grub/grub.cfg
+
+#+end_src
+
+* User
+
+#+begin_src bash
+systemd-machine-id-setup && hostnamectl set-hostname workstation && emerge app-admin/sudo app-editors/neovim && passwd && useradd -m -G users,wheel,audio,video -s /bin/bash ahsan && passwd ahsan && EDITOR=nvim visudo
+
+#+end_src
+
+
+* Install Desktop Environment Packages
+
+#+begin_src bash
+emerge sys-apps/mlocate app-portage/smart-live-rebuild app-portage/gentoolkit sys-apps/grep app-arch/unzip app-arch/zip app-arch/unrar sys-fs/btrfs-progs sys-fs/dosfstools net-misc/wget net-misc/curl app-misc/ckb sys-apps/bat media-gfx/maim dev-python/pynvim sys-apps/ripgrep dev-util/tree-sitter-cli sys-apps/fd app-shells/zsh app-shells/zsh-completions app-shells/gentoo-zsh-completions app-shells/zoxide app-shells/fzf dev-util/fnm x11-themes/papirus-icon-theme net-im/zoom net-im/discord app-text/xournalpp app-text/zathura app-text/zathura-meta app-text/xournalpp sci-chemistry/pymol app-text/zotero-bin dev-vcs/lazygit dev-python/pipx dev-python/yapf dev-python/black dev-python/isort net-libs/nodejs dev-python/matplotlib dev-python/scipy sci-biology/biopython dev-python/pandas app-forensics/aide sys-apps/haveged app-forensics/lynis sys-process/audit app-admin/sysstat sys-process/acct x11-drivers/nvidia-drivers net-misc/networkmanager x11-themes/kvantum dev-lang/typescript net-wireless/gnome-bluetooth gui-apps/qt6ct x11-misc/qt5ct gui-apps/wl-clipboard x11-terms/alacritty gui-apps/grim gui-apps/slurp gui-apps/wf-recorder x11-base/xwayland dev-libs/gjs dev-lang/sassc app-misc/brightnessctl media-sound/pavucontrol gui-apps/tuigreet dev-python/python-pam gui-apps/swappy gui-apps/swww sys-power/upower gnome-base/gvfs xfce-base/thunar xfce-base/thunar-volman xfce-extra/thunar-archive-plugin xfce-extra/thunar-media-tags-plugin xfce-base/tumbler net-misc/insync games-util/steam-meta games-util/lutris virtual/wine media-fonts/nerd-fonts dev-util/rustup sys-apps/zram-generator app-shells/starship www-client/brave-bin gnome-extra/ags gui-wm/hyprland gui-libs/xdg-desktop-portal-hyprland gui-apps/hyprshade dev-util/hyprwayland-scanner gui-libs/hyprcursor gui-apps/hyprlock gui-apps/hypridle gui-wm/hyprland-contrib gui-apps/hyprpicker x11-libs/libnotify
+
+#+end_src
+
+
+* SYSTEMD
+
+#+begin_src bash
+systemctl preset-all && systemctl enable NetworkManager sysstat apparmor auditd rngd nvidia-suspend.service nvidia-resume.service
+
+#+end_src
+
+* A. POST-INSTALL NVIDIA-SETUP
+
+#+begin_src bash
+nvim /etc/modprobe.d/nvidia.conf
+
+options nvidia-drm modeset=1
+options nvidia NVreg_UsePageAttributeTable=1
+
+#+end_src
+
+
+nvim /etc/modprobe.d/nvidia-power-management.conf
+options nvidia NVreg_PreserveVideoMemoryAllocations=1 NVreg_TemporaryFilePath=/tmp
+
+#scaling apps
+--force-device-scale-factor=1.75 %U
+
+#setup snapper
+sudo umount /.snapshots/ && sudo rm -r /.snapshots/ && sudo snapper -c root create-config / && sudo btrfs subvolume delete /.snapshots && sudo mkdir /.snapshots && sudo mount -a && sudo chmod 750 /.snapshots && sudo lvim /etc/snapper/configs/root && sudo systemctl enable --now snapper-timeline.timer && sudo systemctl enable --now snapper-cleanup.timer && yay -S snap-pac-grub snapper-gui && sudo mkdir /etc/pacman.d/hooks && sudo lvim /etc/pacman.d/hooks/50-bootbackup.hook
+
+[Trigger]
+Operation = Upgrade
+Operation = Install
+Operation = Remove
+Type = Path
+Target = boot/*
+
+[Action]
+Depends = rsync
+Description = Backing up /boot...
+When = PreTransaction
+Exec = /usr/bin/rsync -a --delete /boot /.bootbackup
+
+# chrome sandbox
+sudo chown root:root chrome-sandbox
+sudo chmod 4755 chrome-sandbox
+
+sudo lvim /usr/share/gvfs/mounts/network.mount
+AutoMount=false
+
+* SYSCTL KERNEL HARDENING
+
+#+begin_src bash
+sudo nvim /etc/sysctl.d/harden.conf
+
+kernel.kptr_restrict=2
+kernel.dmesg_restrict=1
+kernel.printk=3 3 3 3
+kernel.unprivileged_bpf_disabled=1
+net.core.bpf_jit_harden=2
+dev.tty.ldisc_autoload=0
+vm.unprivileged_userfaultfd=0
+kernel.kexec_load_disabled=1
+kernel.sysrq=4
+kernel.unprivileged_userns_clone=0
+kernel.perf_event_paranoid=3
+net.ipv4.tcp_syncookies=1
+net.ipv4.tcp_rfc1337=1
+net.ipv4.conf.all.rp_filter=1
+net.ipv4.conf.default.rp_filter=1
+net.ipv4.conf.all.accept_redirects=0
+net.ipv4.conf.default.accept_redirects=0
+net.ipv4.conf.all.secure_redirects=0
+net.ipv4.conf.default.secure_redirects=0
+net.ipv6.conf.all.accept_redirects=0
+net.ipv6.conf.default.accept_redirects=0
+net.ipv4.conf.all.send_redirects=0
+net.ipv4.conf.default.send_redirects=0
+net.ipv4.icmp_echo_ignore_all=1
+net.ipv4.conf.all.accept_source_route=0
+net.ipv4.conf.default.accept_source_route=0
+net.ipv6.conf.all.accept_source_route=0
+net.ipv6.conf.default.accept_source_route=0
+net.ipv6.conf.all.accept_ra=0
+net.ipv6.conf.default.accept_ra=0
+net.ipv4.tcp_sack=0
+net.ipv4.tcp_dsack=0
+net.ipv4.tcp_fack=0
+kernel.yama.ptrace_scope=2
+vm.mmap_rnd_bits=32
+vm.mmap_rnd_compat_bits=16
+fs.protected_symlinks=1
+fs.protected_hardlinks=1
+fs.protected_fifos=2
+fs.protected_regular=2
+
+#+end_src
+
+* Issue && Issue.net
+
+#+begin_src bash
+-- WARNING -- This system is for the use of authorized users only. Individuals
+using this computer system without authority or in excess of their authority
+are subject to having all their activities on this system monitored and
+recorded by system personnel. Anyone using this system expressly consents to
+such monitoring and is advised that if such monitoring reveals possible
+evidence of criminal activity system personal may provide the evidence of such
+monitoring to law enforcement officials.
+
+#+end_src
+
+# Install nvhpc
+wget https://developer.download.nvidia.com/hpc-sdk/23.9/nvhpc_2023_239_Linux_x86_64_cuda_12.2.tar.gz
+tar xpzf nvhpc_2023_239_Linux_x86_64_cuda_12.2.tar.gz
+nvhpc_2023_239_Linux_x86_64_cuda_12.2/install
+
+# Tinker9 installation
+git clone --recurse-submodules https://github.com/TinkerTools/tinker9.git
+cd tinker9 && mkdir build && cd build
+cmake -DCMAKE_Fortran_COMPILER=gfortran -DCOMPUTE_CAPABILITY=70 ..
+make -j22
+make test
+
+rustup-init-gentoo
+
+CONFIG_NF_CT_NETLINK_HELPER
+
+* POST-INSTALL CHROOT IN RECOVERY
+
+** Mount Drives
+
+#+begin_src bash
+cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent /dev/nvme0n1p2 cryptroot  && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/mapper/cryptroot /mnt/gentoo && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/mapper/cryptroot /mnt/gentoo/home && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@opt /dev/mapper/cryptroot /mnt/gentoo/opt && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@var /dev/mapper/cryptroot /mnt/gentoo/var && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@tmp /dev/mapper/cryptroot /mnt/gentoo/var/tmp && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@log /dev/mapper/cryptroot /mnt/gentoo/var/log && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@audit /dev/mapper/cryptroot /mnt/gentoo/var/log/audit && mount -o noatime,compress=zstd,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/gentoo/.snapshots && mkdir --parents /mnt/gentoo/etc/portage/repos.conf && cp /mnt/gentoo/usr/share/portage/config/repos.conf /mnt/gentoo/etc/portage/repos.conf/gentoo.conf && cp --dereference /etc/resolv.conf /mnt/gentoo/etc/ && mount --types proc /proc /mnt/gentoo/proc && mount --rbind /sys /mnt/gentoo/sys && mount --make-rslave /mnt/gentoo/sys && mount --rbind /dev /mnt/gentoo/dev && mount --make-rslave /mnt/gentoo/dev && mount --bind /run /mnt/gentoo/run && mount --make-slave /mnt/gentoo/run && test -L /dev/shm && rm /dev/shm && mkdir /dev/shm && mount -t tmpfs -o nosuid,nodev,noexec shm /dev/shm && chmod 1777 /dev/shm
+
+#+end_src
+
+** Chroot Environment & Boot Drive
+
+#+begin_src bash
+chroot /mnt/gentoo /bin/bash
+source /etc/profile
+export PS1="(chroot) ${PS1}"
+
+mount /dev/nvme0n1p1 /boot
+#+end_src
+
+ There is apparre
+ *   CONFIG_NF_CT_NETLINK_HELPER:	 is not set when it should be.
+ *   CONFIG_NFT_OBJREF:	 is not set when it should be.
+
+ *   CONFIG_PPP_DEFLATE:         missing Deflate compression (optional, but highly recommended)
+ *   CONFIG_PPP_BSDCOMP:         missing BSD-Compress compression (optional, but highly recommended)
+
+
+git config --global credential.helper /usr/bin/git-credential-libsecret
+
+
+sudo chage --mindays 40 \
+--maxdays 120 --warndays 30 ahsan
+
+* gcc upgrade
+emerge -aq sys-devel/gcc &&  rust go nodejs llvm python
+
+emerge -av dev-lang/python --jobs=10
+
+* gcc downgrade
+revdep-rebuild --library 'libstdc++.so.6' -- --exclude gcc && emerge --ask --oneshot --usepkg=n --verbose sys-devel/libtool
+
+grep 'app-emacs/' /var/lib/portage/world | xargs --open-tty emerge --ask --deselect; emerge --ask --depcleaneselect repository add brave-overlay git https://gitlab.com/jason.oliveira/brave-overlay.git
+
+** kernel setup
+
+mount /dev/nvme1n1p1 /boot && cd /boot && rm -rf * && cd && cd /lib/modules && rm -rf * && cd && emerge --unmerge xanmod-sources && rm -rf /usr/src/linux-* && emerge xanmod-sources && eselect kernel set 1 && ls -l /usr/src/linux
+
+make -j22 && make modules_install -j22 && emerge nvidia-drivers && make install && genkernel --luks --microcode --install initramfs && grub-install --target=x86_64-efi --efi-directory=/boot && grub-install --target=x86_64-efi --efi-directory=/boot --removable && grub-mkconfig -o /boot/grub/grub.cfg
+

@@ -1,0 +1,23 @@
+#!/bin/bash
+
+mkdir -p /mnt/gentoo &&
+  mount -o bind / /mnt/gentoo &&
+  mount -o bind /home /mnt/gentoo/home &&
+  mount -o bind /opt /mnt/gentoo/opt &&
+  mount -o bind /root /mnt/gentoo/root &&
+  mount -o bind /srv /mnt/gentoo/srv &&
+  mount -o bind /usr/local /mnt/gentoo/usr/local &&
+  mount -o bind /var /mnt/gentoo/var &&
+  mount -o bind /var/cache /mnt/gentoo/var/cache &&
+  mount -o bind /var/crash /mnt/gentoo/var/crash &&
+  mount -o bind /var/log /mnt/gentoo/var/log &&
+  mount -o bind /var/log/audit /mnt/gentoo/var/log/audit &&
+  mount -o bind /var/tmp /mnt/gentoo/var/tmp &&
+  mount -o bind /.snapshots /mnt/gentoo/.snapshots
+
+# setfiles -r /mnt/gentoo /etc/selinux/targeted/contexts/files/file_contexts /mnt/gentoo/{dev,boot,proc,run,sys,tmp,home,opt,root,srv,usr/local,var,var/cache,var/crash,var/tmp,var/log,var/log/audit,.snapshots}
+
+# umount /mnt/gentoo
+# rlpkg -a -r
+# semanage login -a -s staff_u ahsan
+# restorecon -R -F /home/ahsan

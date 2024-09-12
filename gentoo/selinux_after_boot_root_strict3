@@ -1,0 +1,2 @@
+semanage user -m -R "staff_r sysadm_r system_r" root
+semanage user -m -R "staff_r sysadm_r system_r" staff_u

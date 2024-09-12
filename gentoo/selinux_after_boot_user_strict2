@@ -1,0 +1,4 @@
+#!/bin/bash
+id -Z
+newrole -r sysadm_r
+id -Z
