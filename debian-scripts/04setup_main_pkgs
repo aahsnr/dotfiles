@@ -1,0 +1,89 @@
+#!/bin/bash
+
+echo "Installing Main Pkgs"
+sleep 3
+sudo apt install -y build-essential cargo rustc gcc cmake cmake-extras gnome-font-viewer clang ubuntu-dev-tools devscripts make meson wget curl pkg-config thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler git bat deluge-gtk ranger gvfs xdg-user-dirs xdg-user-dirs-gtk file-roller alacritty kitty ncurses-term maim golang-go zsh zoxide fzf mate-polkit x11-xkb-utils x11-xserver-utils xserver-xorg-core xournalpp zathura zathura-pdf-poppler pymol git-lfs libpam-tmpdir python3-pip pipx rng-tools-debian haveged lynis auditd sysstat fail2ban acct apparmor apparmor-notify apparmor-profiles apparmor-profiles-extra apparmor-utils wayland-protocols network-manager network-manager-gnome qt5-style-kvantum qt6ct qt5ct pipewire pipewire-alsa pipewire-pulse pipewire-jack wireplumber pavucontrol alsa-utils libpulse-dev pamixer xdg-desktop-portal xdg-desktop-portal-gtk nwg-look grim slurp swappy cliphist wl-clipboard greetd firefox gettext gettext-base fontconfig fontconfig-config vulkan-utility-libraries-dev hwdata xwayland cpio gnome-keyring maim systemd-zram-generator gir1.2-secret-1 xserver-xorg-video-amdgpu firmware-misc-nonfree firmware-linux-free firmware-linux-nonfree firmware-amd-graphics amd64-microcode fwupd bluez bluez-alsa-utils bluez-firmware bluez-tools blueman binutils cron chrony debianutils logrotate psmisc power-profiles-daemon upower xz-utils python3-pil python3-requests python3-build python3-dev python3-installer zip 7zip unzip wayland-utils bash-completion ripgrep fd-find fastfetch man-db gawk inotify-tools libbtrfsutil1t64 libinotifytools0 libsigsegv2 python3-btrfsutil bleachbit stacer direnv tmux libsecret-tools tealdeer luarocks tree-sitter-cli foot eza ninja-build scdoc 
+
+echo "Installing nodejs"
+sleep 3
+cd
+curl -fsSL https://deb.nodesource.com/setup_22.x -o nodesource_setup.sh
+sudo bash nodesource_setup.sh
+sudo nano /etc/apt/preferences.d/nodejs
+sudo apt update -y
+sudo apt install -y nodejs
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
+export PATH=~/.npm-global/bin:$PATH
+cd && sudo rm -rf nodesource_setup.sh
+
+echo "Installing bun"
+sleep 3
+cd &&
+  curl -fsSL https://bun.sh/install | bash &&
+  sudo ln -sv $HOME/.bun/bin/bun /usr/local/bin/bun
+
+echo "Installing bun packages"
+sleep 3
+bun install -g sass &&
+  sudo ln -sv $HOME/.bun/bin/sass /usr/local/bin/sass
+bun install -g typescript &&
+  sudo ln -sv $HOME/.bun/bin/tsc /usr/local/bin/tsc &&
+  sudo ln -sv $HOME/.bun/bin/tsserver /usr/local/bin/tsserver
+
+echo "Installing cargo packagest"
+sleep 3
+cd
+cargo install bottom &&
+  sudo ln -sv $HOME/.cargo/bin/btm /usr/local/bin/btm
+# cargo install starship &&
+#   sudo ln -sv $HOME/.cargo/bin/starship /usr/local/bin/starship
+cargo install matugen &&
+  sudo ln -sv $HOME/.cargo/bin/matugen /usr/local/bin/matugen
+cargo install --git https://github.com/donovanglover/hyprnome &&
+  sudo ln -sv $HOME/.cargo/bin/hyprnome /usr/local/bin/hyprnome
+cargo install --locked yazi-fm yazi-cli &&
+  sudo ln -sv $HOME/.cargo/bin/yazi /usr/local/bin/yazi &&
+  sudo ln -sv $HOME/.cargo/bin/ya /usr/local/bin/ya
+cargo install --locked zellij &&
+  sudo ln -sv $HOME/.cargo/bin/zellij /usr/local/bin/zellij
+
+echo "Installing go packages"
+sleep 3
+cd &&
+  go install github.com/jesseduffield/lazygit@latest &&
+  sudo ln -sv $HOME/go/bin/lazygit /usr/local/bin/lazygit
+
+echo "Installing pipx packages"
+sleep 3
+pipx install hyprshade pyprland
+
+echo "Installing spotify"
+sleep 3
+curl -sS https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg &&
+  echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list &&
+  sudo apt update -y && sudo apt install -y spotify-client
+
+echo "Installng Brave"
+sleep 3
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo apt update -y
+sudo apt install -y brave-browser
+
+echo "Install Google Chrome"
+sleep 3
+cd && curl -fSsL https://dl.google.com/linux/linux_signing_key.pub | sudo gpg --dearmor | sudo tee /usr/share/keyrings/google-chrome.gpg >>/dev/null
+echo deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main | sudo tee /etc/apt/sources.list.d/google-chrome.list
+sudo apt update -y
+sudo apt install -y google-chrome-stable
+
+echo "Installing element-desktop"
+sleep 3
+sudo apt install -y wget apt-transport-https
+sudo wget -O /usr/share/keyrings/element-io-archive-keyring.gpg https://packages.element.io/debian/element-io-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/element-io-archive-keyring.gpg] https://packages.element.io/debian/ default main" | sudo tee /etc/apt/sources.list.d/element-io.list
+sudo apt update -y
+sudo apt install -y element-desktop
+
+echo "End of Hyprland Setup"

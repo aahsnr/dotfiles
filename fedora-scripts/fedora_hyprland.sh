@@ -4,11 +4,15 @@ echo "@REPOS"
 sleep 5
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 sudo dnf config-manager --enable fedora-cisco-openh264
+sudo dnf install rpmfusion-nonfree-release-tainted
 sudo dnf copr enable atim/lazygit
 sudo dnf copr enable atim/starship
 sudo dnf copr enable solopasha/hyprland
 sudo dnf copr enable mecattaf/wl-gammarelay-rs
 sudo dnf copr enable lukenukem/asus-linux
+sudo dnf copr enable heus-sueh/packages
+sudo dnf config-manager --save --setopt=copr:copr.fedorainfracloud.org:heus-sueh:packages.priority=200
+
 
 echo "@DNF5$"
 sleep 5
@@ -132,12 +136,13 @@ sudo dnf5 install \
 echo "@DRIVERS"
 sleep 5
 sudo dnf5 install \
-  akmod-nvidia \
+  akmod-nvidia-open \
   xorg-x11-drv-nvidia-cuda \
   xorg-x11-drv-nvidia-power \
   xorg-x11-drv-nvidia-cuda-libs \
   libva-devel \
   libva-utils \
+  mesa-dri-drivers \
   nvidia-vaapi-driver \
   vulkan \
   amd-ucode-firmware \
@@ -146,7 +151,7 @@ sudo dnf5 install \
   mokutil \
   openssl
 
-sudo dnf mark install akmod-nvidia
+sudo dnf mark install akmod-nvidia-open
 #sudo kmodgenca -a
 #sudo mokutil --import /etc/pki/akmods/certs/public_key.der
 #sudo systemctl enable nvidia-suspend.service nvidia-resume.service
@@ -230,6 +235,7 @@ sudo dnf5 install \
   nwg-clipman \
   egl-wayland \
   greetd \
+  pam-devel \
   grim \
   hyprcursor \
   hypridle \
@@ -256,6 +262,8 @@ sudo dnf5 install \
   xorg-x11-server-Xwayland \
   xorg-x11-server-Xwayland-devel \
   wf-recorder
+
+sudo dnf install pipewire libgtop2 bluez bluez-tools grimblast hyprpicker btop NetworkManager  wl-clipboard swww brightnessctl gnome-bluetooth aylurs-gtk-shell power-profiles-daemon gvfs matugen
 
 echo "@ASUS"
 sleep 5
@@ -333,7 +341,14 @@ cd && mkdir ~/.npm-global
 npm config set prefix '~/.npm-global'
 ln -s $HOME/.dots/.config/nvim $HOME/.config/
 
-npm install -g sass bun
+npm install -g sass 
+
+curl -fsSL https://bun.sh/install | bash && \
+  sudo ln -s $HOME/.bun/bin/bun /usr/local/bin/bun
+
+flatpak install flathub --system com.dec05eba.gpu_screen_recorder
+
+pipx install gpustat pywal
 
 echo "@ZSH"
 sleep 5
@@ -350,5 +365,7 @@ sleep 5
 sudo cp -R ~/.dots/variables.sh /etc/profile.d/
 git config --global user.name "zielOS"
 git config --global user.email "ahsanur041@gmail.com"
-#git config --global credential.helper /usr/libexec/git-core/git-credential-libsecret
+git config --global credential.helper /usr/libexec/git-core/git-credential-libsecret
 
+
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo

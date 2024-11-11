@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo apt install -y nvidia-driver nvidia-kernel-dkms nvidia-vaapi-driver --install-recommends
+sudo apt install -y xserver-xorg-video-amdgpu mesa-utils vulkan-validationlayers vulkan-tools nvidia-vulkan-common mesa-vulkan-drivers
+sudo apt remove -y nvidia-persistenced

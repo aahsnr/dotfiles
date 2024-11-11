@@ -1,9 +1,10 @@
 #!/bin/sh
 echo "Installing hyprlock"
-cd && git clone https://github.com/hyprwm/hyprlock.git 
-cd hyprlock && git checkout v0.4.1 
+sleep 3
+sudo apt install -y libdrm-dev libgbm-dev
+cd && git clone https://github.com/hyprwm/hyprlock.git
+cd hyprlock && git checkout v0.5.0
 cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -S . -B ./build
-cmake --build ./build --config Release --target hyprlock -j`nproc 2>/dev/null || getconf NPROCESSORS_CONF`
-sudo cmake --install build 
+cmake --build ./build --config Release --target hyprlock -j$(nproc 2>/dev/null || getconf NPROCESSORS_CONF)
+sudo cmake --install build
 cd && sudo rm -rf hyprlock
-

@@ -1,0 +1,8 @@
+#!/bin/bash
+cd &&
+  sudo apt install -y snapper snapper-gui &&
+  cd $HOME/.dots/debian-scripts/preconfig_files &&
+  sudo install -Dm755 dpkg-pre-post-snapper "/usr/local/bin/dpkg-pre-post-snapper" &&
+  cd &&
+  sudo cp -R $HOME/.dots/debian-scripts/preconfig_files/80snapper /etc/apt/apt.conf.d/ &&
+  cd

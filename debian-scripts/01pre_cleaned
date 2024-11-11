@@ -1,2 +1,2 @@
-#!/bin/sh
+#!/bin/bash
 cd && apt list --installed | cut -d/ -f1 > pre-cleaned.txt

@@ -1,9 +1,29 @@
-import = ["/home/ahsan/.config/alacritty/colors.toml", "/home/ahsan/.config/alacritty/fonts.toml"]
-live_config_reload = true
+[colors]
+[colors.bright]
+black = "#4C566A"
+blue = "#81A1C1"
+cyan = "#8FBCBB"
+green = "#A3BE8C"
+magenta = "#B48EAD"
+red = "#BF616A"
+yellow = "#EBCB8B"
+
+[colors.normal]
+black = "#3B4252"
+blue = "#81A1C1"
+cyan = "#88C0D0"
+green = "#A3BE8C"
+magenta = "#B48EAD"
+red = "#BF616A"
+white = "#E5E9F0"
+yellow = "#EBCB8B"
+
+[colors.primary]
+background = "#1E1E2E"
+foreground = "#CDD6F4"
 
 [cursor]
 unfocused_hollow = false
-
 [cursor.style]
 blinking = "On"
 shape = "Block"
@@ -11,6 +31,20 @@ shape = "Block"
 [env]
 TERM = "alacritty"
 WINIT_X11_SCALE_FACTOR = "1.0"
+
+[fonts]
+italic = "Ubuntu Nerd Font"
+normal = "Ubuntu Nerd Font"
+size = 22
+[fonts.bold]
+family = "Ubunut Nerd Font"
+
+[fonts.bold_italic]
+family = "Ubuntu Nerd Font"
+
+[fonts.offset]
+x = 0
+y = 0
 
 [window]
 decorations = "full"

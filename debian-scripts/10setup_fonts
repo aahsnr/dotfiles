@@ -1,0 +1,8 @@
+#!/bin/bash
+echo "Installing fonts"
+sleep 3
+sudo mkdir -p /usr/local/share/fonts/nerd
+sudo cp -R $HOME/.dots/.fonts/*  /usr/local/share/fonts/nerd/
+sudo chown -R root: /usr/local/share/fonts/nerd
+sudo chmod 644 /usr/local/share/fonts/nerd/*
+sudo fc-cache -v

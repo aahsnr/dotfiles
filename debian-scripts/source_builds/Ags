@@ -1,7 +1,10 @@
 #!/bin/bash
+echo "Installing Ags"
+sleep 3
+sudo apt install -y libpam0g-dev meson libgjs-dev gjs libgtk-layer-shell-dev libgtk-3-dev libpulse-dev network-manager-dev libgnome-bluetooth-3.0-dev libdbusmenu-gtk3-dev libsoup-3.0-dev
 cd && git clone --recursive https://github.com/Aylur/ags.git
 cd ags
-git checkout v1.8.2
 npm install
 meson setup build
-meson install -C build
+sudo meson install -C build
+cd && sudo rm -R ags

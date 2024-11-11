@@ -1,15 +1,15 @@
 lastupdatecheck: 0
 recentrepos:
     - /home/ahsan/.dots
-    - /home/ahsan/.config/doom
 startuppopupversion: 5
-lastversion: 0.44.0
+lastversion: unversioned
 customcommandshistory:
+    - wq
     - q
 hidecommandlog: false
 ignorewhitespaceindiffview: false
-diffcontextsize: 2
-renamesimilaritythreshold: 50
+diffcontextsize: 1
+renamesimilaritythreshold: 55
 localbranchsortorder: recency
 remotebranchsortorder: alphabetical
 gitlogorder: topo-order

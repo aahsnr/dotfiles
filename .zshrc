@@ -1,39 +1,35 @@
-#!/bin/sh
-[ -f "$HOME/.local/share/zap/zap.zsh" ] && source "$HOME/.local/share/zap/zap.zsh"
-
-export VISUAL="nvim"
+source $HOME/.config/zsh/aliases.zsh
+source $HOME/.config/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 
 # history
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 
-# source
-plug "$HOME/.config/zsh/aliases.zsh"
-plug "$HOME/.config/zsh/syntax_highlighting/catppuccin_mocha-zsh-syntax-highlighting.zsh"
-
-# plugins
-plug "hlissner/zsh-autopair"
-plug "Aloxaf/fzf-tab" 
-plug "zsh-users/zsh-syntax-highlighting"
-plug "zsh-users/zsh-history-substring-search"
-plug "zsh-users/zsh-completions"
-plug "zsh-users/zsh-autosuggestions"
-plug "esc/conda-zsh-completion"
-plug "zap-zsh/supercharge"
+autoload -Uz compinit promptinit
+compinit
+promptinit
 
 # keybinds
 bindkey '^ ' autosuggest-accept
 
-#eval "$(fnm env)"
 eval "$(zoxide init zsh)"
-eval "$(starship init zsh)"
+#eval "$(starship init zsh)"
+eval "$(direnv hook zsh)"
+
+#export
+export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
+export EDITOR=${EDITOR:-/usr/bin/emacs}
+export PAGER=${PAGER:-/usr/bin/less}
+export BROWSER="brave-browser"
+export TERMINAL="foot"
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 
 
+#antidote
+zstyle ':antidote:compatibility-mode' 'antibody' 'on'
+source /usr/share/zsh-antidote/antidote.zsh
+antidote load $HOME/.config/zsh/.zsh_plugins.txt
 
-# bun completions
-[ -s "/home/ahsan/.bun/_bun" ] && source "/home/ahsan/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"

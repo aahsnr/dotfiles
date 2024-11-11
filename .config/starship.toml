@@ -37,5 +37,10 @@ staged = "+${count}"
 renamed = "*${count}"
 deleted = "-${count}"
 
+[sudo]
+style = 'bold green'
+symbol = '👩 '
+disabled = false
+
 [conda]
 symbol = ' '

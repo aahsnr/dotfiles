@@ -1,0 +1,10 @@
+.cache/
+.ds_store
+.idea/
+*.swp
+*.elc
+auto-save-list
+.direnv/
+node_modules
+result
+result-*
