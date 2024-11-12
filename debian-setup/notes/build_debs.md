@@ -32,6 +32,7 @@
 21. asusctl
 22. supergfxctl
 23. sbctl
+24. arkime
 
 ## The following packages are to upgraded to the latest package from ubuntu launchpad, snap package or the latest stable release
 1. lxc
