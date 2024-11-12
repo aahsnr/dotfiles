@@ -4,6 +4,7 @@ sudo rm -R ~/.config/
 cd && mkdir $HOME/.config
 ln -sv $HOME/.dots/gentoo_setup $HOME/
 ln -sv $HOME/.dots/org $HOME/
+ln -sv $HOME/.dots/.config/ags $HOME/.config/
 ln -sv $HOME/.dots/.config/hypr $HOME/.config/
 ln -sv $HOME/.dots/.config/bat $HOME/.config/
 ln -sv $HOME/.dots/.config/Thunar $HOME/.config/
