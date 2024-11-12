@@ -3,12 +3,15 @@ echo "Installing gtk theme"
 sudo apt install -y gnome-themes-extra gtk2-engines-murrine sassc
 cd && git clone https://github.com/vinceliuice/Colloid-gtk-theme.git
 cd Colloid-gtk-theme
-./install.sh -l -t orange -c dark --tweaks catppuccin --tweaks rimless
+sudo ./install.sh -l -t orange -c dark --tweaks catppuccin --tweaks rimless
 cd && sudo rm -R Colloid-gtk-theme
 
 echo "Installing Icons"
 cd && git clone https://github.com/vinceliuice/Colloid-icon-theme.git
 cd Colloid-icon-theme
-./install.sh -s catppuccin -t orange
+sudo ./install.sh -s catppuccin -t orange
 cd && sudo rm -R Colloid-icon-theme
+
+echo "Installing Cursors"
+sudo apt install -y bibata-cursor-theme
 

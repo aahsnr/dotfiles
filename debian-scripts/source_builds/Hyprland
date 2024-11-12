@@ -3,7 +3,8 @@ echo "Installing Hyprland"
 sleep 3
 sudo apt install -y libxcb-composite0-dev libxcb-errors-dev libxcb-util-dev libxcb-icccm4-dev libxcb-res0-dev libsystemd-dev systemd-dev
 cd && git clone --recursive https://github.com/hyprwm/Hyprland
-cd Hyprland && git checkout v0.45
+cd Hyprland && git checkout v0.45.0
+sleep 3
 export CXXFLAGS="-w" # suppress all compiler warnings
 meson setup build \
   --wipe \

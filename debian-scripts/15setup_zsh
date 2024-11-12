@@ -5,5 +5,4 @@ ln -sv $HOME/.dots/.config/zsh $HOME/.config/
 #ln -sv $HOME/.dots/.config/starship.toml $HOME/.config/
 ln -sv $HOME/.dots/.zshrc $HOME/
 chsh -s $(which zsh)
-zsh
-pk10 configure
+

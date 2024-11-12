@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Installing Texlab"
-sleep 5
+sleep 3
 cd && git clone https://github.com/latex-lsp/texlab.git
 cd texlab
 cargo build --release

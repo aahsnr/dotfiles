@@ -1,18 +1,13 @@
 import { opt, mkOptions } from 'lib/option';
-import {
-    NetstatIcon,
-    NetstatLabelType,
-    PowerIcon,
-    RateUnit,
-    ResourceLabelType,
-    StorageIcon,
-    UpdatesIcon,
-} from 'lib/types/bar';
-import { KbIcon, KbLabelType } from 'lib/types/customModules/kbLayout';
+import { NetstatLabelType, RateUnit, ResourceLabelType } from 'lib/types/bar';
+import { KbLabelType } from 'lib/types/customModules/kbLayout';
 import {
     ActiveWsIndicator,
     BarButtonStyles,
+    BarLayout,
     BarLocation,
+    BluetoothBatteryState,
+    BorderLocation,
     NotificationAnchor,
     OSDAnchor,
     OSDOrientation,
@@ -20,8 +15,10 @@ import {
     WindowLayer,
 } from 'lib/types/options';
 import { MatugenScheme, MatugenTheme, MatugenVariations } from 'lib/types/options';
+import { SystrayIconMap } from 'lib/types/systray';
 import { UnitType } from 'lib/types/weather';
-import { WorkspaceIcons, WorkspaceIconsColored } from 'lib/types/workspace';
+import { Transition } from 'lib/types/widget';
+import { ApplicationIcons, WorkspaceIcons, WorkspaceIconsColored } from 'lib/types/workspace';
 
 // WARN: CHANGING THESE VALUES WILL PREVENT MATUGEN COLOR GENERATION FOR THE CHANGED VALUE
 export const colors = {
@@ -94,6 +91,9 @@ const tertiary_colors = {
 
 const options = mkOptions(OPTIONS, {
     theme: {
+        tooltip: {
+            scaling: opt(100),
+        },
         matugen: opt(false),
         matugen_settings: {
             mode: opt<MatugenTheme>('dark'),
@@ -103,7 +103,7 @@ const options = mkOptions(OPTIONS, {
         },
         font: {
             size: opt('1.2rem'),
-            name: opt('JetBrainsMono Nerd Font'),
+            name: opt('Ubuntu Nerd Font'),
             weight: opt(600),
         },
         notification: {
@@ -150,26 +150,33 @@ const options = mkOptions(OPTIONS, {
             floating: opt(false),
             location: opt<BarLocation>('top'),
             layer: opt<WindowLayer>('top'),
-            margin_top: opt('0em'),
+            margin_top: opt('0.5em'),
             opacity: opt(100),
             margin_bottom: opt('0em'),
-            margin_sides: opt('0em'),
-            border_radius: opt('0.5em'),
-            outer_spacing: opt('0em'),
+            margin_sides: opt('0.5em'),
+            border_radius: opt('0.4em'),
+            outer_spacing: opt('1.6em'),
             label_spacing: opt('0.5em'),
             transparent: opt(false),
             dropdownGap: opt('2.9em'),
             background: opt(colors.crust),
+            border: {
+                location: opt<BorderLocation>('none'),
+                width: opt('0.15em'),
+                color: opt(colors.lavender),
+            },
             buttons: {
                 style: opt<BarButtonStyles>('default'),
                 enableBorders: opt(false),
                 borderSize: opt('0.1em'),
+                borderColor: opt(colors.lavender),
                 monochrome: opt(false),
                 spacing: opt('0.25em'),
                 padding_x: opt('0.7rem'),
                 padding_y: opt('0.2rem'),
                 y_margins: opt('0.4em'),
                 radius: opt('0.3em'),
+                innerRadiusMultiplier: opt('0.4'),
                 opacity: opt(100),
                 background_opacity: opt(100),
                 background_hover_opacity: opt(100),
@@ -188,6 +195,7 @@ const options = mkOptions(OPTIONS, {
                 workspaces: {
                     background: opt(colors.base2),
                     enableBorder: opt(false),
+                    smartHighlight: opt(true),
                     border: opt(colors.pink),
                     available: opt(colors.sky),
                     occupied: opt(colors.flamingo),
@@ -247,6 +255,7 @@ const options = mkOptions(OPTIONS, {
                 },
                 systray: {
                     enableBorder: opt(false),
+                    customIcon: opt(colors.text),
                     border: opt(colors.lavender),
                     background: opt(colors.base2),
                     spacing: opt('0.5em'),
@@ -294,6 +303,15 @@ const options = mkOptions(OPTIONS, {
                         background: opt(colors.base2),
                         text: opt(colors.red),
                         icon: opt(colors.red),
+                        icon_background: opt(colors.base2),
+                        spacing: opt('0.5em'),
+                    },
+                    cpuTemp: {
+                        enableBorder: opt(false),
+                        border: opt(colors.peach),
+                        background: opt(colors.base2),
+                        text: opt(colors.peach),
+                        icon: opt(colors.peach),
                         icon_background: opt(colors.base2),
                         spacing: opt('0.5em'),
                     },
@@ -377,6 +395,8 @@ const options = mkOptions(OPTIONS, {
                 feinttext: opt(colors.surface0),
                 label: opt(colors.lavender),
                 popover: {
+                    scaling: opt(100),
+                    radius: opt('0.4em'),
                     text: opt(colors.lavender),
                     background: opt(secondary_colors.mantle),
                     border: opt(secondary_colors.mantle),
@@ -393,6 +413,8 @@ const options = mkOptions(OPTIONS, {
                     enabled: opt(colors.lavender),
                     disabled: opt(tertiary_colors.surface0),
                     puck: opt(secondary_colors.surface1),
+                    radius: opt('0.2em'),
+                    slider_radius: opt('0.2em'),
                 },
                 check_radio_button: {
                     background: opt(colors.surface1),
@@ -403,6 +425,7 @@ const options = mkOptions(OPTIONS, {
                     active: opt(secondary_colors.pink),
                     disabled: opt(tertiary_colors.surface2),
                     text: opt(secondary_colors.mantle),
+                    radius: opt('0.4em'),
                 },
                 iconbuttons: {
                     passive: opt(secondary_colors.text),
@@ -411,12 +434,15 @@ const options = mkOptions(OPTIONS, {
                 progressbar: {
                     foreground: opt(colors.lavender),
                     background: opt(colors.surface1),
+                    radius: opt('0.3rem'),
                 },
                 slider: {
                     primary: opt(colors.lavender),
                     background: opt(tertiary_colors.surface2),
                     backgroundhover: opt(colors.surface1),
                     puck: opt(colors.overlay0),
+                    slider_radius: opt('0.3rem'),
+                    progress_radius: opt('0.3rem'),
                 },
                 dropdownmenu: {
                     background: opt(colors.crust),
@@ -424,6 +450,7 @@ const options = mkOptions(OPTIONS, {
                     divider: opt(colors.base),
                 },
                 tooltip: {
+                    radius: opt('0.3em'),
                     background: opt(colors.crust),
                     text: opt(tertiary_colors.lavender),
                 },
@@ -433,6 +460,7 @@ const options = mkOptions(OPTIONS, {
                         song: opt(tertiary_colors.lavender),
                         artist: opt(tertiary_colors.teal),
                         album: opt(tertiary_colors.pink),
+                        timestamp: opt(colors.text),
                         background: {
                             color: opt(colors.crust),
                         },
@@ -457,7 +485,7 @@ const options = mkOptions(OPTIONS, {
                         },
                     },
                     volume: {
-                        scaling: opt(98),
+                        scaling: opt(100),
                         card: {
                             color: opt(colors.base),
                         },
@@ -525,6 +553,11 @@ const options = mkOptions(OPTIONS, {
                         iconbuttons: {
                             passive: opt(colors.text),
                             active: opt(colors.mauve),
+                        },
+                        switch: {
+                            enabled: opt(colors.mauve),
+                            disabled: opt(tertiary_colors.surface0),
+                            puck: opt(secondary_colors.surface1),
                         },
                     },
                     bluetooth: {
@@ -643,8 +676,8 @@ const options = mkOptions(OPTIONS, {
                         },
                     },
                     dashboard: {
-                        scaling: opt(95),
-                        confirmation_scaling: opt(95),
+                        scaling: opt(100),
+                        confirmation_scaling: opt(100),
                         card: {
                             color: opt(colors.base),
                         },
@@ -821,8 +854,8 @@ const options = mkOptions(OPTIONS, {
 
     bar: {
         scrollSpeed: opt(5),
-        layouts: opt({
-            '0': {
+        layouts: opt<BarLayout>({
+            '1': {
                 left: ['dashboard', 'workspaces', 'windowtitle'],
                 middle: ['media'],
                 right: ['volume', 'clock', 'notifications'],
@@ -832,7 +865,7 @@ const options = mkOptions(OPTIONS, {
                 middle: ['media'],
                 right: ['volume', 'clock', 'notifications'],
             },
-            '1': {
+            '0': {
                 left: ['dashboard', 'workspaces', 'windowtitle'],
                 middle: ['media'],
                 right: ['volume', 'network', 'bluetooth', 'battery', 'systray', 'clock', 'notifications'],
@@ -840,6 +873,7 @@ const options = mkOptions(OPTIONS, {
         }),
         launcher: {
             icon: opt('󰣇'),
+            autoDetectIcon: opt(false),
             rightClick: opt(''),
             middleClick: opt(''),
             scrollUp: opt(''),
@@ -861,9 +895,15 @@ const options = mkOptions(OPTIONS, {
         },
         workspaces: {
             show_icons: opt(false),
+            showAllActive: opt(true),
             ignored: opt(''),
             show_numbered: opt(false),
             showWsIcons: opt(false),
+            showApplicationIcons: opt(false),
+            applicationIconOncePerWorkspace: opt(true),
+            applicationIconMap: opt<ApplicationIcons>({}),
+            applicationIconFallback: opt('󰣆'),
+            applicationIconEmptyWorkspace: opt(''),
             numbered_active_indicator: opt<ActiveWsIndicator>('underline'),
             icons: {
                 available: opt(''),
@@ -871,10 +911,10 @@ const options = mkOptions(OPTIONS, {
                 occupied: opt(''),
             },
             workspaceIconMap: opt<WorkspaceIcons | WorkspaceIconsColored>({}),
-            workspaces: opt(10),
+            workspaces: opt(5),
             spacing: opt(1),
             monitorSpecific: opt(true),
-            hideUnoccupied: opt(false),
+            hideUnoccupied: opt(true),
             workspaceMask: opt(false),
             reverse_scroll: opt(false),
             scroll_speed: opt(5),
@@ -888,6 +928,7 @@ const options = mkOptions(OPTIONS, {
         },
         network: {
             truncation: opt(true),
+            showWifiInfo: opt(false),
             truncation_size: opt(7),
             label: opt(true),
             rightClick: opt(''),
@@ -904,6 +945,7 @@ const options = mkOptions(OPTIONS, {
         },
         battery: {
             label: opt(true),
+            hideLabelWhenFull: opt(false),
             rightClick: opt(''),
             middleClick: opt(''),
             scrollUp: opt(''),
@@ -911,6 +953,7 @@ const options = mkOptions(OPTIONS, {
         },
         systray: {
             ignore: opt<string[]>([]),
+            customIcons: opt<SystrayIconMap>({}),
         },
         clock: {
             icon: opt('󰸗'),
@@ -923,7 +966,7 @@ const options = mkOptions(OPTIONS, {
             scrollDown: opt(''),
         },
         media: {
-            show_artist: opt(false),
+            format: opt('{artist: - }{title}'),
             truncation: opt(true),
             show_label: opt(true),
             truncation_size: opt(30),
@@ -933,6 +976,7 @@ const options = mkOptions(OPTIONS, {
         },
         notifications: {
             show_total: opt(false),
+            hideCountWhenZero: opt(false),
             rightClick: opt(''),
             middleClick: opt(''),
             scrollUp: opt(''),
@@ -941,6 +985,7 @@ const options = mkOptions(OPTIONS, {
         customModules: {
             scrollSpeed: opt(5),
             ram: {
+                icon: opt(''),
                 label: opt(true),
                 labelType: opt<ResourceLabelType>('percentage'),
                 round: opt(true),
@@ -950,6 +995,7 @@ const options = mkOptions(OPTIONS, {
                 middleClick: opt(''),
             },
             cpu: {
+                icon: opt(''),
                 label: opt(true),
                 round: opt(true),
                 pollingInterval: opt(2000),
@@ -959,9 +1005,23 @@ const options = mkOptions(OPTIONS, {
                 scrollUp: opt(''),
                 scrollDown: opt(''),
             },
+            cpuTemp: {
+                icon: opt(''),
+                sensor: opt(''),
+                label: opt(true),
+                round: opt(true),
+                showUnit: opt(true),
+                unit: opt<UnitType>('metric'),
+                pollingInterval: opt(2000),
+                leftClick: opt(''),
+                rightClick: opt(''),
+                middleClick: opt(''),
+                scrollUp: opt(''),
+                scrollDown: opt(''),
+            },
             storage: {
                 label: opt(true),
-                icon: opt<StorageIcon>('󰋊'),
+                icon: opt('󰋊'),
                 round: opt(false),
                 labelType: opt<ResourceLabelType>('percentage'),
                 pollingInterval: opt(2000),
@@ -972,7 +1032,8 @@ const options = mkOptions(OPTIONS, {
             netstat: {
                 label: opt(true),
                 networkInterface: opt(''),
-                icon: opt<NetstatIcon>('󰖟'),
+                dynamicIcon: opt(false),
+                icon: opt('󰖟'),
                 round: opt(true),
                 labelType: opt<NetstatLabelType>('full'),
                 rateUnit: opt<RateUnit>('auto'),
@@ -984,7 +1045,7 @@ const options = mkOptions(OPTIONS, {
             kbLayout: {
                 label: opt(true),
                 labelType: opt<KbLabelType>('code'),
-                icon: opt<KbIcon>('󰌌'),
+                icon: opt('󰌌'),
                 leftClick: opt(''),
                 rightClick: opt(''),
                 middleClick: opt(''),
@@ -995,7 +1056,7 @@ const options = mkOptions(OPTIONS, {
                 updateCommand: opt('$HOME/.config/ags/scripts/checkUpdates.sh -arch'),
                 label: opt(true),
                 padZero: opt(true),
-                icon: opt<UpdatesIcon>('󰏖'),
+                icon: opt('󰏖'),
                 pollingInterval: opt(1000 * 60 * 60 * 6),
                 leftClick: opt(''),
                 rightClick: opt(''),
@@ -1005,6 +1066,7 @@ const options = mkOptions(OPTIONS, {
             },
             submap: {
                 label: opt(true),
+                showSubmapName: opt(true),
                 enabledIcon: opt('󰌐'),
                 disabledIcon: opt('󰌌'),
                 enabledText: opt('Submap On'),
@@ -1025,7 +1087,7 @@ const options = mkOptions(OPTIONS, {
                 scrollDown: opt(''),
             },
             power: {
-                icon: opt<PowerIcon>(''),
+                icon: opt(''),
                 showLabel: opt(true),
                 leftClick: opt('menu:powerdropdown'),
                 rightClick: opt(''),
@@ -1037,30 +1099,53 @@ const options = mkOptions(OPTIONS, {
     },
 
     menus: {
+        transition: opt<Transition>('crossfade'),
+        transitionTime: opt(200),
+        media: {
+            hideAuthor: opt(false),
+            hideAlbum: opt(false),
+            displayTime: opt(false),
+            displayTimeTooltip: opt(false),
+            noMediaText: opt('No Media Currently Playing'),
+        },
+        bluetooth: {
+            showBattery: opt(false),
+            batteryState: opt<BluetoothBatteryState>('connected'),
+            batteryIcon: opt('󰥉'),
+        },
+        volume: {
+            raiseMaximumVolume: opt(false),
+        },
         power: {
             showLabel: opt(true),
             confirmation: opt(true),
             sleep: opt('systemctl suspend'),
             reboot: opt('systemctl reboot'),
-            logout: opt('pkill Hyprland'),
-            shutdown: opt('shutdown now'),
+            logout: opt('hyprctl dispatch exit'),
+            shutdown: opt('systemctl poweroff'),
         },
         dashboard: {
             powermenu: {
                 confirmation: opt(true),
                 sleep: opt('systemctl suspend'),
                 reboot: opt('systemctl reboot'),
-                logout: opt('pkill Hyprland'),
-                shutdown: opt('shutdown now'),
+                logout: opt('hyprctl dispatch exit'),
+                shutdown: opt('systemctl poweroff'),
                 avatar: {
-                    image: opt('avatar-default-symbolic'),
+                    image: opt('$HOME/.face.icon'),
                     name: opt<'system' | string>('system'),
                 },
             },
             stats: {
-                enable_gpu: opt(true),
+                enabled: opt(true),
+                interval: opt(2000),
+                enable_gpu: opt(false),
+            },
+            controls: {
+                enabled: opt(true),
             },
             shortcuts: {
+                enabled: opt(true),
                 left: {
                     shortcut1: {
                         icon: opt('󰇩'),
@@ -1097,32 +1182,33 @@ const options = mkOptions(OPTIONS, {
                 },
             },
             directories: {
+                enabled: opt(true),
                 left: {
                     directory1: {
                         label: opt('󰉍 Downloads'),
-                        command: opt('bash -c "thunar $HOME/Downloads/"'),
+                        command: opt('bash -c "xdg-open $HOME/Downloads/"'),
                     },
                     directory2: {
                         label: opt('󰉏 Videos'),
-                        command: opt('bash -c "dolphin $HOME/Videos/"'),
+                        command: opt('bash -c "xdg-open $HOME/Videos/"'),
                     },
                     directory3: {
                         label: opt('󰚝 Projects'),
-                        command: opt('bash -c "thunar $HOME/Projects/"'),
+                        command: opt('bash -c "xdg-open $HOME/Projects/"'),
                     },
                 },
                 right: {
                     directory1: {
                         label: opt('󱧶 Documents'),
-                        command: opt('bash -c "thunar $HOME/Documents/"'),
+                        command: opt('bash -c "xdg-open $HOME/Documents/"'),
                     },
                     directory2: {
                         label: opt('󰉏 Pictures'),
-                        command: opt('bash -c "thunar $HOME/Pictures/"'),
+                        command: opt('bash -c "xdg-open $HOME/Pictures/"'),
                     },
                     directory3: {
                         label: opt('󱂵 Home'),
-                        command: opt('bash -c "thunar $HOME/"'),
+                        command: opt('bash -c "xdg-open $HOME/"'),
                     },
                 },
             },
@@ -1130,11 +1216,13 @@ const options = mkOptions(OPTIONS, {
         clock: {
             time: {
                 military: opt(false),
+                hideSeconds: opt(false),
             },
             weather: {
+                enabled: opt(true),
                 interval: opt(60000),
                 unit: opt<UnitType>('imperial'),
-                location: opt('Dhaka'),
+                location: opt('Los Angeles'),
                 key: opt<string>(
                     JSON.parse(Utils.readFile(`${App.configDir}/.weather.json`) || '{}')?.weather_api_key || '',
                 ),
@@ -1144,8 +1232,7 @@ const options = mkOptions(OPTIONS, {
 
     scalingPriority: opt<ScalingPriority>('gdk'),
 
-    terminal: opt('alacritty'),
-
+    terminal: opt('$TERM'),
     tear: opt(false),
 
     wallpaper: {
@@ -1160,8 +1247,15 @@ const options = mkOptions(OPTIONS, {
         displayedTotal: opt(10),
         monitor: opt(0),
         active_monitor: opt(true),
+        showActionsOnHover: opt(false),
         timeout: opt(7000),
         cache_actions: opt(true),
+        clearDelay: opt(100),
+    },
+
+    hyprpanel: {
+        restartAgs: opt(true),
+        restartCommand: opt('ags -q; ags'),
     },
 
     dummy: opt(true),

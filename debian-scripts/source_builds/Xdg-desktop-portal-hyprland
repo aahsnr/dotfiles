@@ -4,6 +4,7 @@ sleep 3
 sudo apt install -y qt6-base-dev libpipewire-0.3-dev libspa-0.2-dev
 cd && git clone --recursive https://github.com/hyprwm/xdg-desktop-portal-hyprland
 cd xdg-desktop-portal-hyprland && git checkout v1.3.8
+sleep 3
 cmake -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib -DCMAKE_INSTALL_PREFIX=/usr -B build
 cmake --build build
 sudo cmake --install build
