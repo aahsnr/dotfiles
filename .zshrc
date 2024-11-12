@@ -13,9 +13,9 @@ promptinit
 # keybinds
 bindkey '^ ' autosuggest-accept
 
-eval "$(zoxide init zsh)"
+#eval "$(zoxide init zsh)"
 #eval "$(starship init zsh)"
-eval "$(direnv hook zsh)"
+#eval "$(direnv hook zsh)"
 . "$HOME/.cargo/env"  
 
 #export

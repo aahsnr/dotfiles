@@ -30,6 +30,7 @@ return {
     opts = {
       ensure_installed = {
         "python",
+        "bash",
         -- add more arguments for adding more debuggers
       },
     },
