@@ -1,12 +1,12 @@
 #!/bin/bash
-# Add Docker's official GPG key:
+echo "Installing docker"
+sleep 3
 sudo apt-get -y update
 sudo apt-get -y install ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-# Add the repository to Apt sources:
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
   $(. /etc/os-release && echo "bookworm") stable" |
@@ -14,3 +14,6 @@ echo \
 sudo apt-get -y update
 sudo apt-get -y install docker docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo groupadd docker
+
+echo "Installing distrobox"
+sudo apt install -y distrobox

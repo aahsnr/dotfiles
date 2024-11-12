@@ -1,6 +1,5 @@
 #!/bin/bash
 flatpak install flathub io.github.zen_browser.zen -y
-flatpak install flathub com.google.Chrome -y
 flatpak install flathub com.bitwarden.desktop -y
 flatpak install flathub org.zotero.Zotero -y
 flatpak install flathub com.github.tchx84.Flatseal -y
