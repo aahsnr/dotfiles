@@ -46,3 +46,4 @@
 32. Add hyprmenu to HyprPanel
 33. Import bookmarks and info from chrome to firefox, and then to zen-browser
 34. When adding Kali linux repo, only add certain packages in debian-pinning
+35. Add hyprsunset to replace hyprshade
