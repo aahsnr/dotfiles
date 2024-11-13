@@ -3,7 +3,7 @@ echo "Installing Nwg-menu"
 sleep 3
 sudo apt install -y libgtk-3-dev
 cd && git clone https://github.com/nwg-piotr/nwg-menu.git
-cd nwg-menu && git checkout 0.1.6
+cd nwg-menu && git checkout v0.1.6
 sleep 3
 make get 
 make build 
