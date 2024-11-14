@@ -4,8 +4,8 @@ recentrepos:
 startuppopupversion: 5
 lastversion: unversioned
 customcommandshistory:
-    - wq
     - q
+    - wq
 hidecommandlog: false
 ignorewhitespaceindiffview: false
 diffcontextsize: 1

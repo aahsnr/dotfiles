@@ -1,6 +1,6 @@
-1. Add p10k to zsh and apply instant-prompt
-2. Decide whether or not to use gpg-agent plugin from oh-my-zsh
-3. The following hyprland plugins need to installed after logging into Hyprland:
+*[] Add p10k to zsh and apply instant-prompt
+*[] Decide whether or not to use gpg-agent plugin from oh-my-zsh
+*[] The following hyprland plugins need to installed after logging into Hyprland:
    - hyprexpo from hyprland-plugins
    - hyprspace
    - hyprnome
@@ -48,4 +48,4 @@
 34. When adding Kali linux repo, only add certain packages in debian-pinning
 35. Add hyprsunset to replace hyprshade
 36. Don't build emacs yourself since it starts on X11 by showing that error
-37. Setup a separate setup_bins script
+*[X] Setup a separate setup_bins script TODO 
