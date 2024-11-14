@@ -1,9 +1,15 @@
 #!/bin/bash
-cd && wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb
-sudo dpkg -i cuda-keyring_1.1-1_all.deb
-sudo apt-get update -y
-sudo apt-get -y install nvidia-open --install-recommends
-sudo apt install -y xserver-xorg-video-amdgpu mesa-utils vulkan-validationlayers vulkan-tools nvidia-vulkan-common mesa-vulkan-drivers --install-recommends
+## debian method
+sudo apt install -y nvidia-driver nvidia-kernel-dkms nvidia-vaapi-driver xserver-xorg-video-amdgpu mesa-utils vulkan-validationlayers vulkan-tools nvidia-vulkan-common mesa-vulkan-drivers firmware-nvidia-graphics --install-recommends
 sudo systemctl disable nvidia-persistenced
-cd && sudo rm -R cuda-keyring_1.1-1_all.deb
+sudo reboot
+
+## cuda method
+# cd && wget https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/cuda-keyring_1.1-1_all.deb
+# sudo dpkg -i cuda-keyring_1.1-1_all.deb
+# sudo apt-get update -y
+# sudo apt-get -y install nvidia-open --install-recommends
+# sudo apt install -y xserver-xorg-video-amdgpu mesa-utils vulkan-validationlayers vulkan-tools nvidia-vulkan-common mesa-vulkan-drivers --install-recommends
+# sudo systemctl disable nvidia-persistenced
+# cd && sudo rm -R cuda-keyring_1.1-1_all.deb
 #sudo reboot

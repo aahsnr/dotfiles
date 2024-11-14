@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Installing asusctl"
-sudo apt install libclang-dev libudev-dev libfontconfig-dev build-essential cmake libxkbcommon-dev --install-recommends
+sudo apt install -y libclang-dev libudev-dev libfontconfig-dev build-essential cmake libxkbcommon-dev 
 cd && git clone https://gitlab.com/asus-linux/asusctl.git
 cd asusctl
 make -j8

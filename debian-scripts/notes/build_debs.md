@@ -33,6 +33,7 @@
 22. supergfxctl
 23. sbctl
 24. arkime
+25. nwg-hello
 
 ## The following packages are to upgraded to the latest package from ubuntu launchpad, snap package or the latest stable release
 1. lxc
