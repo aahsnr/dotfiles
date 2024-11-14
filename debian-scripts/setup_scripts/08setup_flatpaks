@@ -7,3 +7,4 @@ flatpak install flathub com.notesnook.Notesnook -y
 flatpak install flathub org.onlyoffice.desktopeditors -y
 flatpak install flathub org.squidowl.halloy -y
 flatpak install flathub com.dropbox.Client -y
+flatpak install flathub md.obsidian.Obsidian -y

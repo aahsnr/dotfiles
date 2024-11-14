@@ -4,7 +4,7 @@ sleep 3
 #bash $HOME/.dots/debian-scripts/source_builds/Ags && cd
 bash $HOME/.dots/debian-scripts/source_builds/Anyrun && cd
 bash $HOME/.dots/debian-scripts/source_builds/Asuslinux && cd
-bash $HOME/.dots/debian-scripts/source_builds/Emacs && cd
+#bash $HOME/.dots/debian-scripts/source_builds/Emacs && cd
 bash $HOME/.dots/debian-scripts/source_builds/Emacs-lsp-booster && cd
 bash $HOME/.dots/debian-scripts/source_builds/Grub-btrfs && cd
 bash $HOME/.dots/debian-scripts/source_builds/Hyprutils && cd
@@ -22,6 +22,7 @@ bash $HOME/.dots/debian-scripts/source_builds/Hyprland-contrib && cd
 bash $HOME/.dots/debian-scripts/source_builds/Neovim && cd
 bash $HOME/.dots/debian-scripts/source_builds/Nwg-drawer && cd
 bash $HOME/.dots/debian-scripts/source_builds/Nwg-menu && cd
+bash $HOME/.dots/debian-scripts/source_builds/Nwg-hello && cd
 bash $HOME/.dots/debian-scripts/source_builds/Regreet && cd
 bash $HOME/.dots/debian-scripts/source_builds/Rofi && cd
 bash $HOME/.dots/debian-scripts/source_builds/Texlab && cd
