@@ -1,8 +1,8 @@
 #!/bin/bash
 
-THEME='Colloid-Orange-Catppuccin-Dark'
-ICONS='Colloid-Dark-Catppuccin'
-FONT='Ubuntu Nerd Font Medium'
+THEME='Colloid-Orange-Dark-Catppuccin'
+ICONS='Colloid-Orange-Catppuccin-Dark'
+FONT='JetBrainsMono Nerd Font Medium 13'
 CURSOR='Bibata-Modern-Ice'
 
 SCHEMA='gsettings set org.gnome.desktop.interface'
