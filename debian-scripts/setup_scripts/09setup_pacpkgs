@@ -1,0 +1,24 @@
+#!/bin/bash
+sudo apt install -y axel 
+
+sudo bash -c "$(curl -fsSL https://pacstall.dev/q/install)"
+
+pacstall -I -Ns zen-browser-specific-bin
+
+echo "Bitwarden v2024.11.2"
+sleep 4
+pacstall -I -Ns bitwarden-deb
+pacstall -I -Ns zotero
+
+echo "Onlyoffice v8.2.2"
+sleep 4
+pacstall -I -Ns onlyoffice-desktopeditors-deb
+pacstall -I -Ns dropbox-deb
+
+echo "Obsidian v1.7.7"
+sleep 4
+pacstall -I -Ns obsidian-deb
+
+sudo apt install -y python3-pynvim ripgrep tree-sitter-cli fd-find ninja-build gettext cmake unzip curl build-essential python3-debugpy
+pacstall -I -Ns neovim
+

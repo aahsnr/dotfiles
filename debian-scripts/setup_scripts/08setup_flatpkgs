@@ -1,0 +1,8 @@
+#!/bin/bash
+sudo apt install -y flatpak
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+flatpak install flathub com.github.tchx84.Flatseal -y
+flatpak install flathub com.notesnook.Notesnook -y
+flatpak install flathub org.squidowl.halloy -y
+flatpak install flathub io.github.dvlv.boxbuddyrs -y

@@ -1,0 +1,13 @@
+#!/bin/bash
+sudo apt install -y curl 
+ln -sv $HOME/.dots/.config/atuin $HOME/.config/
+ln -sv $HOME/.dots/.config/bash $HOME/.config/
+ln -sv $HOME/.dots/.bashrc $HOME/
+
+echo "Installing blesh"
+sleep 2
+cd && git clone --recursive --depth 1 --shallow-submodules https://github.com/akinomyoga/ble.sh.git
+make -C ble.sh install PREFIX=~/.local
+cd && sudo rm -rf ble.sh
+cd && source .bashrc
+

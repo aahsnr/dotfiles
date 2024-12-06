@@ -1,0 +1,9 @@
+#!/bin/bash
+#2 stands for standard error '>' send it to /dev/null, as in non-existent
+find /etc -type f 2>/dev/null
+#1 stands for standard output; it is implied automatically so no need to state it like below
+find /etc -type f 1>/dev/null
+# & stands for both 1 and 2
+find /etc -type f &>file.txt
+
+find /etc -type f 1>find_results.txt 2>find_errors.txt

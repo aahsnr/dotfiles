@@ -1,0 +1,30 @@
+[commit]
+	gpgsign = true
+
+[core]
+	pager = "delta"
+
+[delta]
+	dark = true
+
+[filter "lfs"]
+	clean = "git-lfs clean -- %f"
+	process = "git-lfs filter-process"
+	required = true
+	smudge = "git-lfs smudge -- %f"
+
+[gpg]
+	program = "gpg2"
+
+[interactive]
+	diffFilter = "delta --color-only"
+
+[tag]
+	gpgSign = true
+
+[user]
+	email = ahsanur041@proton.me
+	name = aahsnr
+	#signingKey = "08355C6639A6013D"
+[credential]
+	helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret

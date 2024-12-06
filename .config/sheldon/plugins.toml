@@ -1,0 +1,19 @@
+# ~/.config/sheldon/plugins.toml
+
+[plugins.base16]
+github = "chriskempson/base16-shell"
+
+[plugins.supercharge]
+github = "zap-zsh/supercharge"
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+
+[plugins.zsh-syntax-highlighting]
+github = "zsh-users/zsh-syntax-highlighting"
+
+[plugins.conda-zsh-completion]
+github = "esc/conda-zsh-completion"
+
+[plugins.zsh-you-should-use]
+github = "MichaelAquilina/zsh-you-should-use"
