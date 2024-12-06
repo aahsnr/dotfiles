@@ -37,9 +37,6 @@
 [submodule ".config/ags"]
 	path = .config/ags
 	url = https://github.com/Jas-SinghFSU/HyprPanel.git
-[submodule "ubuntu-maintainers-handbook"]
-	path = ubuntu-maintainers-handbook
-	url = https://github.com/canonical/ubuntu-maintainers-handbook.git
 [submodule "ubuntu-scripts/maintainers-handbook"]
 	path = ubuntu-scripts/maintainers-handbook
 	url = https://github.com/canonical/ubuntu-maintainers-handbook.git
