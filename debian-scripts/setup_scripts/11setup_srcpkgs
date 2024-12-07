@@ -1,0 +1,55 @@
+#!/bin/bash
+echo "Installing From Source"
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Agsv1 && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Kidex && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Anyrun && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Asuslinux && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Emacs && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Emacs-lsp-booster && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Grub-btrfs && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprutils && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprlang && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprcursor && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprwayland-scanner && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprpaper && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprpicker && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hypridle && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprlock && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Aquamarine && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Xdg-desktop-portal-hyprland && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprland && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprland-contrib && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprsunset && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Neovim && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Nwg-drawer && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Nwg-menu && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Nwg-hello && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Rofi && cd
+sleep 3
+bash $HOME/.dots/ubuntu-scripts/source_builds/Texlab && cd
+#sudo reboot

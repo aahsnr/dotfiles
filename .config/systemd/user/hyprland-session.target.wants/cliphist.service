@@ -1,0 +1,11 @@
+[Install]
+WantedBy=hyprland-session.target
+
+[Service]
+ExecStart=wl-paste --watch cliphist -max-dedupe-search 10 -max-items 500 store
+Restart=on-failure
+Type=simple
+
+[Unit]
+Description=Clipboard management daemon
+PartOf=graphical-session.target

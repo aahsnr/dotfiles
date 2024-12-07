@@ -1,0 +1,6 @@
+#!/bin/bash
+
+echo "Hello world"
+sudo pacman -S notexist
+exit 0 # the exit command exits out of the script so that the following line never runs
+echo $?

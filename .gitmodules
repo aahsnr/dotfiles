@@ -1,0 +1,42 @@
+[submodule ".rbenv"]
+	path = .rbenv
+	url = https://github.com/rbenv/rbenv.git
+[submodule ".config/bash/fzf-tab-completion"]
+	path = .config/bash/fzf-tab-completion
+	url = https://github.com/lincheney/fzf-tab-completion
+[submodule ".config/zsh/plugins/zsh-history-substring-search"]
+	path = .config/zsh/plugins/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search.git
+[submodule ".config/zsh/plugins/zsh-syntax-highlighting"]
+	path = .config/zsh/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule ".config/zsh/plugins/zsh-completions"]
+	path = .config/zsh/plugins/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions.git
+[submodule ".config/zsh/plugins/zsh-autosuggestions"]
+	path = .config/zsh/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git
+[submodule ".config/zsh/plugins/fzf-tab"]
+	path = .config/zsh/plugins/fzf-tab
+	url = https://github.com/Aloxaf/fzf-tab
+[submodule ".config/zsh/plugins/zsh-autopair"]
+	path = .config/zsh/plugins/zsh-autopair
+	url = https://github.com/hlissner/zsh-autopair
+[submodule "garuda-hyprdots"]
+	path = garuda-hyprdots
+	url = https://github.com/yurihikari/garuda-hyprdots.git
+[submodule "hyprdots"]
+	path = hyprdots
+	url = https://github.com/l6174/hyprdots.git
+[submodule "shh"]
+	path = shh
+	url = https://github.com/synacktiv/shh.git
+[submodule "liquidprompt"]
+	path = liquidprompt
+	url = https://github.com/liquidprompt/liquidprompt.git
+[submodule ".config/ags"]
+	path = .config/ags
+	url = https://github.com/Jas-SinghFSU/HyprPanel.git
+[submodule "ubuntu-scripts/maintainers-handbook"]
+	path = ubuntu-scripts/maintainers-handbook
+	url = https://github.com/canonical/ubuntu-maintainers-handbook.git

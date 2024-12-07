@@ -1,0 +1,67 @@
+[alias]     # command aliases
+b = "build"
+c = "check"
+t = "test"
+r = "run"
+rr = "run --release"
+recursive_example = "rr --example recursions"
+space_example = ["run", "--release", "--", "\"command list\""]
+
+[build]
+jobs = 1                      # number of parallel jobs, defaults to # of CPUs
+rustc = "rustc"               # the rust compiler tool
+rustdoc = "rustdoc"           # the doc generator tool
+target = "triple"             # build for the target triple (ignored by `cargo install`)
+target-dir = "target"         # path of where to place all generated artifacts
+incremental = true            # whether or not to enable incremental compilation
+
+[credential-alias]
+# Provides a way to define aliases for credential providers.
+my-alias = ["/usr/bin/cargo-credential-example", "--argument", "value", "--flag"]
+
+[doc]
+browser = "chromium"          # browser to use with `cargo doc --open`,
+                              # overrides the `BROWSER` environment variable
+[future-incompat-report]
+frequency = 'always' # when to display a notification about a future incompat report
+
+[cargo-new]
+vcs = "none"              # VCS to use ('git', 'hg', 'pijul', 'fossil', 'none')
+
+[install]
+root = "/usr/local/bin/"         # `cargo install` destination directory
+
+[net]
+retry = 3                   # network retries
+git-fetch-with-cli = true   # use the `git` executable for git operations
+offline = true              # do not access the network
+
+[profile.ahsan]         # Modify profile settings via config.
+inherits = "dev"         # Inherits settings from [profile.dev].
+opt-level = 3            # Optimization level.
+debug = true             # Include debug info.
+strip = "none"           # Removes symbols or debuginfo.
+debug-assertions = true  # Enables debug assertions.
+overflow-checks = true   # Enables runtime integer overflow checks.
+lto = true              # Sets link-time optimization.
+panic = 'unwind'         # The panic strategy.
+incremental = true       # Incremental compilation.
+codegen-units = 16       # Number of code generation units.
+rpath = false            # Sets the rpath linking option.
+[profile.ahsan.build-override]  # Overrides build-script settings.
+# Same keys for a normal profile.
+[profile.ahsan.package.ahsan]  # Override profile for a package.
+# Same keys for a normal profile (minus `panic`, `lto`, and `rpath`).
+
+
+[registries.crates-io]
+protocol = "sparse"  # The protocol to use to access crates.io.
+
+[term]
+quiet = false          # whether cargo output is quiet
+verbose = false        # whether cargo provides verbose output
+color = 'auto'         # whether cargo colorizes output
+hyperlinks = true      # whether cargo inserts links into output
+unicode = true         # whether cargo can render output using non-ASCII unicode characters
+progress.when = 'auto' # whether cargo shows progress bar
+progress.width = 80    # width of progress bar
