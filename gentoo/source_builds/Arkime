@@ -1,5 +1,0 @@
-#!/bin/bash
-cd && git clone https://github.com/arkime/arkime.git
-cd arkime && git checkout v5.5.0
-./easybutton-build.sh --install
-make config

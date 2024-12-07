@@ -1,7 +1,0 @@
-#!/bin/bash
-cd && git clone --recursive https://github.com/hyprwm/hyprsunset.git
-cd hyprsunset
-cmake --no-warn-unused-cli -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX=/usr -S . -B ./build
-cmake --build ./build --config Release --target hyprsunset
-sudo cmake --install build
-cd && sudo rm -rf hyprsunset
