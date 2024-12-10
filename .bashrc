@@ -4,6 +4,7 @@
 source $HOME/.config/bash/debian.bash
 source $HOME/.config/bash/aliases.bash
 source $HOME/.config/bash/exports.bash
+source $HOME/.config/bash/pkgmaintain.bash
 
 # If not running interactively, don't do anything
 case $- in
@@ -31,13 +32,8 @@ eval "$(zoxide init bash)"
 eval "$(direnv hook bash)"  
 source ~/.local/share/blesh/ble.sh
 
-# Only load Liquid Prompt in interactive shells, not from a script or from scp
-[[ $- = *i* ]] && source ~/.dots/liquidprompt/liquidprompt
-
-# Debian Package Maintainence
-DEBEMAIL="ahsanur041@proton.me"
-DEBFULLNAME="Ahsanur Rahman"
-export DEBEMAIL DEBFULLNAME
-
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 source ~/.local/share/blesh/ble.sh
+
+# Only load Liquid Prompt in interactive shells, not from a script or from scp
+#[[ $- = *i* ]] && source ~/.dots/liquidprompt/liquidprompt
