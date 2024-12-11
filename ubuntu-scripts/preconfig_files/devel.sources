@@ -1,6 +1,6 @@
 Types: deb deb-src
 URIs: https://archive.ubuntu.com/ubuntu/
-Suites: ./devel ./devel-updates
+Suites: ./devel ./devel-updates ./devel-proposed
 Components: main restricted universe multiverse
 Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 
