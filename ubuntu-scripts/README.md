@@ -98,6 +98,7 @@ glibc --> binutils --> gcc --> go --> python --> glibc --> binutils --> gcc --> 
 - [ ] Setup nix, home-manager and flake in debian
 - [ ] Setup debian iso using https://github.com/rhino-linux/os
 - [ ] After all these steps, create a btrfs snapshot and move from update-initramfs to dracut. Make sure to copy dracut.conf to /etc
+- [ ] Use fractional scaling in hyprland
 
 #### Hardening Ubuntu 
 - [ ] Add kicksecure repo to debian
