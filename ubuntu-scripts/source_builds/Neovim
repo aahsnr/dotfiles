@@ -6,5 +6,4 @@ cd && git clone https://github.com/neovim/neovim
 cd neovim && git checkout stable
 sleep 3
 make CMAKE_BUILD_TYPE=RelWithDebInfo -j22
-sudo make install && cd && sudo rm -rf neovim
-
+sudo make uninstall && cd && sudo rm -rf neovim
