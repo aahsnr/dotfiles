@@ -1,0 +1,10 @@
+#!/bin/bash
+sudo cp -R $HOME/.dots/ubuntu-scripts/preconfig_files/devel.sources /etc/apt/sources.list.d/
+sudo cp -R $HOME/.dots/ubuntu-scripts/preconfig_files/oracular.sources /etc/apt/sources.list.d/
+sudo cp -R $HOME/.dots/ubuntu-scripts/preconfig_files/noble.sources /etc/apt/sources.list.d/
+sudo cp -R $HOME/.dots/ubuntu-scripts/preconfig_files/01norecommend /etc/apt/apt.conf.d
+sudo cp -R $HOME/.dots/ubuntu-scripts/preconfig_files/ubuntu-pinning /etc/apt/preferences.d
+sudo mv /etc/apt/sources.list.d/ubuntu.sources /etc/apt/sources.list.d/ubuntu.sources.bak
+sudo rm -R /etc/apt/sources.list
+sudo apt -y update
+sudo apt -y upgrade

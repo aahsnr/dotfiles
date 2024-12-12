@@ -1,0 +1,12 @@
+#!/bin/bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+cd && cp -R $HOME/.dots/ubuntu-scripts/tmpfiles/.bashrc $HOME/
+cd && source $HOME/.bashrc
+
+brew install bottom
+brew install yazi
+brew install zellij
+brew install atuin
+brew install lazygit
+
