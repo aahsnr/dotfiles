@@ -3,9 +3,5 @@ Pin: release a=unstable
 Pin-Priority: 500
 
 Package: *
-Pin: release a=testing
-Pin-Priority: 300
-
-Package: *
-Pin: release a=bookworm
-Pin-Priority: 100
+Pin: release a=kali-rolling
+Pin-Priority: 50
