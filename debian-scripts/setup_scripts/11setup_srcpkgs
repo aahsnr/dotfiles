@@ -24,6 +24,6 @@ bash $HOME/.dots/ubuntu-scripts/source_builds/Neovim && cd
 # bash $HOME/.dots/ubuntu-scripts/source_builds/Nwg-drawer && cd
 # bash $HOME/.dots/ubuntu-scripts/source_builds/Nwg-menu && cd
 bash $HOME/.dots/ubuntu-scripts/source_builds/Nwg-hello && cd
-# bash $HOME/.dots/ubuntu-scripts/source_builds/Rofi && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Rofi && cd
 # bash $HOME/.dots/ubuntu-scripts/source_builds/Texlab && cd
 #sudo reboot

@@ -28,3 +28,6 @@
 [submodule ".config/home-manager"]
 	path = .config/home-manager
 	url = https://github.com/aahsnr/home-nix
+[submodule "ricjuhnl-dotfiles"]
+	path = ricjuhnl-dotfiles
+	url = https://github.com/ricjuhnl/dotfiles
