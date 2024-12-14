@@ -1,0 +1,8 @@
+#!/bin/bash
+echo "Installing Graphics Drivers"
+sleep 2
+#ubuntu approach
+sudo apt install -y nvidia-dkms-560-open --install-recommends
+sudo apt install -y nvidia-driver-560-open xserver-xorg-video-nvidia-560 --install-recommends
+sudo apt install -y nvidia-vaapi-driver vdpau-driver-all xserver-xorg-video-amdgpu mesa-utils-bin mesa-vulkan-drivers libnvidia-gl-560 vulkan-tools vulkan-utility-libraries-dev vulkan-validationlayers nvidia-firmware-560-560.35.03 --install-recommends
+echo "Finished Installing Graphics Drivers"

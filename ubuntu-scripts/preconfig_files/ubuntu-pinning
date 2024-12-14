@@ -1,0 +1,11 @@
+Package: *
+Pin: release a=./devel ./devel-updates
+Pin-Priority: 500
+ 
+Package: apparmor* libappparmor* nvidia* libnvidia*
+Pin: release a=oracular oracular-updates
+Pin-Priority: 300
+
+Package: *
+Pin: release a=kali-rolling
+Pin-Priority: -50
