@@ -1,7 +1,0 @@
-#!/bin/bash
-
-package=notexist
-
-sudo pacman -S $package
-
-echo "The exit code for the package install is: $?"

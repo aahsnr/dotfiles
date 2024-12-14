@@ -30,4 +30,4 @@
 	url = https://github.com/aahsnr/home-nix
 [submodule "ricjuhnl-dotfiles"]
 	path = ricjuhnl-dotfiles
-	url = https://github.com/ricjuhnl/dotfiles
+	url = https://github.com/ricjuhnl/dotfiles.git
