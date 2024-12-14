@@ -7,7 +7,7 @@ yay -S \
   dosfstools dbus-python devtools deluge dropbox \
   emacs-wayland eza \
   fd flatpak fzf fdupes fastfetch fnm foot fwupd freeoffice \
-  grim greetd gjs gtk3 gtk4 gnome-bluetooth-3.0 gobject-introspection gtk-layer-shell gtk4-layer-shell grub grub-btrfs grub-customizer \
+  grim greetd gnome-keyring gjs gtk3 gtk4 gnome-bluetooth-3.0 gobject-introspection gtk-layer-shell gtk4-layer-shell grub grub-btrfs grub-customizer \
   haveged hyprlang hyprcursor hyprwayland-scanner hypridle hyprlock hyprnome hyprdim hyprpaper hyprpicker hyprland hyprsunset \
   jq jitterentropy-rngd \
   kvantum kvantum-qt5 kvantum-theme-catppuccin-git \
@@ -39,7 +39,4 @@ flatpak install flathub md.obsidian.Obsidian -y
 
 echo "Setup Systemd"
 sudo systemctl set-default graphical.target
-systemctl --user enable --now wireplumber.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service
 
-
-sudo systemctl enable --now jitterentropy sysstat rngd haveged cups avahi-daemon NetworkManager
