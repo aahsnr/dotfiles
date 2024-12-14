@@ -6,9 +6,10 @@ cd yay-bin && makepkg -si
 cd && sudo rm -R yay-bin
 
 ##Install BlackArch Repo
-curl -O https://blackarch.org/strap.sh
+cd && curl -O https://blackarch.org/strap.sh
 chmod +x strap.sh
 sudo ./strap.sh
+cd && sudo rm -rf strap.sh
 
 yay -S \
   acpid alacritty arch-audit audit \
@@ -35,6 +36,7 @@ yay -S \
   vulkan-tools vulkan-headers vulkan-validation-layers \
   wl-clipboard wf-recorder wget wireplumber \
   xorg-xwayland xournalpp xarchiver xdg-user-dirs xdg-user-dirs-gtk xdg-desktop-portal-hyprland \
+  yazi \
   zsh zsh-completions zathura zathura-pdf-poppler zoxide zip
 
 echo "Installing Dot files"
@@ -47,6 +49,7 @@ ln -s $HOME/.dots/.config/kitty $HOME/.config/
 ln -s $HOME/.dots/.config/alacritty $HOME/.config/
 ln -s $HOME/.dots/.config/anyrun $HOME/.config/
 ln -s $HOME/.dots/.config/btop $HOME/.config/
+ln -s $HOME/.dots/.config/foot $HOME/.config/
 ln -s $HOME/.dots/.config/gtk-3.0 $HOME/.config/
 ln -s $HOME/.dots/.config/gtk-4.0 $HOME/.config/
 ln -s $HOME/.dots/.config/hypr $HOME/.config/
@@ -60,6 +63,7 @@ ln -s $HOME/.dots/.config/Thunar $HOME/.config
 ln -s $HOME/.dots/.config/qt5ct $HOME/.config/
 ln -s $HOME/.dots/.config/qt6ct $HOME/.config/
 ln -s $HOME/.dots/.config/wallpapers $HOME/.config/
+ln -s $HOME/.dots/.config/yazi $HOME/.config/
 ln -s $HOME/.dots/.config/zathura $HOME/.config/
 ln -s $HOME/.dots/.config/zsh $HOME/.config/
 ln -s $HOME/.dots/.gtkrc-2.0 $HOME/
@@ -80,11 +84,11 @@ echo "Setup Systemd"
 sudo systemctl set-default graphical.target
 systemctl --user enable --now wireplumber.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service pipewire-pulse.socket pipewire.socket pipewire-pulse.service pipewire.service
 
-echo "Setup zsh"
-zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
-cd && sudo rm -rf .zshrc
-ln -s $HOME/.dots/.zshrc $HOME/
-chsh -s $(which zsh)
+# echo "Setup zsh"
+# zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
+# cd && sudo rm -rf .zshrc
+# ln -s $HOME/.dots/.zshrc $HOME/
+# chsh -s $(which zsh)
 
 echo "Setup Git"
 cd
