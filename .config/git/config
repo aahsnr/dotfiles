@@ -28,4 +28,4 @@
 	signingkey = 9861547E0E174A13 
 
 [credential]
-	helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+	helper = /usr/lib/git-core/git-credential-libsecret
