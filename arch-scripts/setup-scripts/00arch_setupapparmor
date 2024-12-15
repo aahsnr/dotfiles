@@ -139,7 +139,7 @@ mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@ /dev/mapp
   mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@log@audit /dev/mapper/cryptroot /mnt/var/log/audit &&
   mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@tmp /dev/mapper/cryptroot /mnt/var/tmp &&
   mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@spool /dev/mapper/cryptroot /mnt/var/spool &&
-  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/.snapshots &&
+  mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@.snapshots /dev/mapper/cryptroot /mnt/.snapshots &&
   mount /dev/nvme0n1p1 /mnt/boot
 
 
