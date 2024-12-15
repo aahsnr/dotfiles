@@ -1,48 +1,51 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+#### ~/.zshrc file
+##-- SOURCE
+# Source zinit first before anything else
+source /usr/share/zinit/zinit.zsh
+source $HOME/.config/zsh/zinit.zsh
 source $HOME/.config/zsh/aliases.zsh
 source $HOME/.config/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
-source $HOME/.config/zsh/plugins.zsh
-source $HOME/.config/zsh/debian.zsh
+source $HOME/.config/zsh/completions.zsh
+source $HOME/.config/zsh/exports.zsh
+source $HOME/.config/zsh/keybindings.zsh
+#source $HOME/.config/zsh/plugins.zsh
+#source $HOME/.config/zsh/debian.zsh
 
-# history
+##-- HISTORY
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
-# keybinds
-bindkey '^ ' autosuggest-accept
-
+##-- EVAL
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
-. "$HOME/.cargo/env"  
 eval "$(thefuck --alias)"
-eval "$(~/.dots/.rbenv/bin/rbenv init - --no-rehash zsh)"
+eval "$(rbenv init - --no-rehash zsh)"
+eval "$(fzf --zsh)"
 
-FPATH=~/.rbenv/completions:"$FPATH"
+#yazi
+function yy() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
 
+autopair-init
 
-#export
-export XDG_DATA_DIRS="/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share:$XDG_DATA_DIRS"
-export EDITOR=${EDITOR:-/usr/bin/emacs}
-export PAGER=${PAGER:-/usr/bin/less}
-export BROWSER="brave-browser"
-export TERMINAL="foot"
-export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
-export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
-export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
-export PATH=$PATH:$HOME/.config/emacs/bin
-export PATH=$PATH:/var/lib/flatpak/exports/bin
-export PATH=$PATH:$HOME/.local/bin
-export STARSHIP_CACHE=~/.starship/cache
+# FPATH=~/.rbenv/completions:"$FPATH"
 
-# bun completions
-[ -s "/home/ahsan/.bun/_bun" ] && source "/home/ahsan/.bun/_bun"
+# # bun completions
+# [ -s "/home/ahsan/.bun/_bun" ] && source "/home/ahsan/.bun/_bun"
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-DEBEMAIL="ahsanur041@proton.me"
-DEBFULLNAME="Ahsanur Rahman"
-export DEBEMAIL DEBFULLNAME

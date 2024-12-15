@@ -2,9 +2,9 @@
 
 yay -S \
   acpid arch-audit \
-  bat btrfs-progs boost boxbuddy btop btrfs-progs bleachbit bitwarden bitwarden-rofi brightnessctl \
+  bat brave-bin btrfs-progs boost boxbuddy btop btrfs-progs bleachbit bitwarden brightnessctl \
   chrony curl cmake chkrootkit cups cliphist \
-  dosfstools dbus-python devtools deluge dropbox \
+  dosfstools dbus-python devtools deluge direnv dropbox \
   emacs-wayland eza \
   fd flatpak fzf fdupes fastfetch fnm foot fwupd freeoffice \
   grim greetd gnome-keyring gjs gtk3 gtk4 gnome-bluetooth-3.0 gobject-introspection gtk-layer-shell gtk4-layer-shell grub grub-btrfs grub-customizer \
@@ -14,10 +14,10 @@ yay -S \
   logseq-desktop-bin lynis libdbusmenu-gtk3 libsoup3 logrotate libva \
   mesa mate-polkit mpv meson \
   networkmanager notesnook-bin nwg-hello nwg-look nwg-drawer nodejs npm nodejs-neovim \
-  org.freedesktop.secrets onlyoffice-bin \
+  org.freedesktop.secrets onlyoffice-bin obsidian \
   papirus-icon-theme python-pip python-pipx python-pynvim pipewire pipewire-alsa pipewire-pulse pipewire-jack pavucontrol pyprland python-pam \
   qalculate-gtk qt5-wayland qt6-wayland qt5ct qt6ct \
-  rng-tools rofi-wayland rofi-rbw rust ripgrep \
+  rng-tools rbenv rofi-wayland rofi-rbw rust ripgrep \
   swappy sysstat slurp swww sassc snapper snap-pac snap-pac-grub spotify-launcher starship \
   tealdeer thunderbird thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler tree-sitter-cli ttf-jetbrains-mono-nerd ttf-jetbrains-mono ttf-ubuntu-font-family typescript \
   unzip unrar upower \
