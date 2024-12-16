@@ -7,6 +7,7 @@ source $HOME/.config/zsh/aliases.zsh
 source $HOME/.config/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh
 source $HOME/.config/zsh/completions.zsh
 source $HOME/.config/zsh/exports.zsh
+source $HOME/.config/zsh/pureprompt.zsh
 source $HOME/.config/zsh/keybindings.zsh
 #source $HOME/.config/zsh/plugins.zsh
 #source $HOME/.config/zsh/debian.zsh
