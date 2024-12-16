@@ -1,10 +1,11 @@
 #!/bin/zsh
 
 # Add in zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
-
-
-source /usr/share/zsh/plugins/zsh-autopair/autopair.zsh
+zinit light hlissner/zsh-autopair
 
 # Add in snippets
 zinit snippet OMZP::git

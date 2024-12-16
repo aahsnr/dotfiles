@@ -27,7 +27,7 @@ setopt hist_find_no_dups
 
 ##-- EVAL
 eval "$(zoxide init zsh)"
-eval "$(starship init zsh)"
+#eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 eval "$(thefuck --alias)"
 eval "$(rbenv init - --no-rehash zsh)"
@@ -50,3 +50,4 @@ autopair-init
 # # bun completions
 # [ -s "/home/ahsan/.bun/_bun" ] && source "/home/ahsan/.bun/_bun"
 
+autoload -Uz compinit && compinit
