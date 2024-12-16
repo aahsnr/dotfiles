@@ -2,7 +2,7 @@
 ##-- PROMPT
 #
 
-fpath+=(/usr/share/zsh/pure)
+fpath+=(/usr/share/zsh/functions)
 autoload -U promptinit; promptinit
 
 # optionally define some options
