@@ -36,7 +36,7 @@ zinit light zap-zsh/supercharge
 zinit light zap-zsh/vim
 # zinit light zap-zsh/zap-prompt
 # plug "zap-zsh/atmachine" 
-zinit light zap-zsh/fzf
+# zinit light zap-zsh/fzf
 zinit light zap-zsh/exa
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-history-substring-search

@@ -124,6 +124,7 @@ nvim /etc/default/grub
 GRUB_CMDLINE_LINUX_DEFAULT="quiet loglevel=3 cryptdevice=UUID=e1778643-a4b2-4cd5-b42b-25c9c995ee6b:cryptroot root=/dev/mapper/cryptroot nvidia-drm.modeset=1 rootfstype=btrfs rootflags=rw root_trim=yes"
 GRUB_CMDLINE_LINUX=""
 
+GRUB_CMDLINE_LINUX_DEFAULT='nowatchdog nvme_load=YES rd.luks.uuid=d31114f8-58f8-4f4c-9ea2-b496daa906b7 nvidia_drm.modeset=1 loglevel=0 quiet'
 
 pacman -S eos-dracut
 
@@ -166,4 +167,4 @@ cryptsetup open --perf-no_read_workqueue --perf-no_write_workqueue --persistent 
   mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@log /dev/mapper/cryptroot /mnt/var/log &&
   mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@var@log@audit /dev/mapper/cryptroot /mnt/var/log/audit &&
   mount -o noatime,compress=zstd:3,space_cache=v2,discard=async,subvol=@snapshots /dev/mapper/cryptroot /mnt/.snapshots &&
-  mount /dev/nvme0n1p1 /mnt/boot
+  mount /dev/nvme0n1p1 /mnt/boot/efi
