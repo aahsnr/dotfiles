@@ -60,7 +60,7 @@ function M:peek()
 	end
 
 	ya.preview_widgets(self, {
-		ui.Text(
+		ui.Paragraph(
 			ui.Rect({
 				x = self.area.x,
 				y = self.area.y + image_height,
@@ -68,7 +68,7 @@ function M:peek()
 				h = self.area.h - image_height,
 			}),
 			lines
-		):wrap(ui.Text.WRAP),
+		):wrap(ui.Paragraph.WRAP),
 	})
 end
 

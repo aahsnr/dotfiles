@@ -1,0 +1,3 @@
+[submodule "/home/ahsan/.dots/.config/yazi/plugins/bat.yazi"]
+	path = /home/ahsan/.dots/.config/yazi/plugins/bat.yazi
+	url = https://github.com/mgumz/yazi-plugin-bat.git
