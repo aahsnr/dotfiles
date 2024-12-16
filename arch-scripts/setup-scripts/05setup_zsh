@@ -1,5 +1,0 @@
-#!/bin/bash
-yay -S zsh zsh-pure-prompt zinit
-ln -sv $HOME/.dots/.zshrc $HOME/
-ln -sv $HOME/.dots/.config/zsh $HOME/.config
-chsh -s $(which zsh)
