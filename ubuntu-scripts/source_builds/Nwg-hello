@@ -3,7 +3,7 @@ echo "Installing Nwg-hello"
 sleep 2
 sudo apt install -y libgtk-layer-shell-dev gnome-themes-extra python3-build python3-installer python3-wheel python3-setuptools
 cd && git clone https://github.com/nwg-piotr/nwg-hello.git
-cd nwg-hello 
+cd nwg-hello && git checkout v0.3.0 
 
 sudo install -D -m 644 -t /etc/nwg-hello/ nwg-hello-default.json
 sudo install -D -m 644 -t /etc/nwg-hello/ nwg-hello-default.css

@@ -2,7 +2,7 @@
 echo "Installing nwg-drawer"
 sleep 2
 cd && git clone https://github.com/nwg-piotr/nwg-drawer.git
-cd nwg-drawer
+cd nwg-drawer && git checkout v0.6.0
 make get
 make build
 sudo make install
