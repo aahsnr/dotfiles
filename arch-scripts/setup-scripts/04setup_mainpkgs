@@ -7,8 +7,8 @@ yay -S --noconfirm \
   dosfstools dbus-python devtools deluge direnv dropbox downgrade pacman-contrib \
   emacs-wayland eza \
   fd flatpak fzf fdupes fastfetch fnm foot fwupd freeoffice \
-  grim greetd gnome-keyring gjs gtk3 gtk4 gnome-bluetooth-3.0 gobject-introspection gtk-layer-shell gtk4-layer-shell grub grub-btrfs grub-customizer gst-plugins-pipewire gst-plugins-bad gst-plugins-ugly gst-plugins-good \
-  haveged hyprlang hyprcursor hyprwayland-scanner hypridle hyprlock hyprnome hyprdim hyprpaper hyprpicker hyprland hyprsunset \
+  grim greetd gnome-keyring gjs gtk3 gtk4 gnome-bluetooth-3.0 gobject-introspection gtk-layer-shell gtk4-layer-shell grub grub-btrfs grub-customizer gst-plugin-pipewire gst-plugins-bad gst-plugins-ugly gst-plugins-good gvfs-goa \
+  haveged hyprlang-git hyprcursor-git hyprwayland-scanner-git hypridle-git hyprlock-git hyprnome hyprdim hyprpaper-git hyprpicker-git hyprland-git hyprsunset-git \
   jq jitterentropy-rngd \
   kvantum kvantum-qt5 kvantum-theme-catppuccin-git \
   logseq-desktop-bin lynis libdbusmenu-gtk3 libsoup3 logrotate libva \
