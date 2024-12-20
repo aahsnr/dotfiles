@@ -18,6 +18,7 @@ ln -sv $HOME/.dots/.config/lazygit $HOME/.config/
 ln -sv $HOME/.dots/.config/mpv $HOME/.config/
 ln -sv $HOME/.dots/.config/nvim $HOME/.config/
 ln -sv $HOME/.dots/.config/nwg-look $HOME/.config/
+ln -sv $HOME/.dots/.config/kitty $HOME/.config/
 ln -sv $HOME/.dots/.config/qalculate $HOME/.config/
 ln -sv $HOME/.dots/.config/qt5ct $HOME/.config/
 ln -sv $HOME/.dots/.config/qt6ct $HOME/.config/

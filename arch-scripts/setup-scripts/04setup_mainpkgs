@@ -19,7 +19,7 @@ yay -S --noconfirm \
   qalculate-gtk qt5-wayland qt6-wayland qt5ct qt6ct \
   rng-tools rbenv rofi-wayland rofi-rbw rust ripgrep \
   swappy sysstat slurp swww sassc snapper snap-pac snap-pac-grub spotify-launcher starship sof-firmware smartmontools \
-  tealdeer thunderbird thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler tree-sitter-cli ttf-jetbrains-mono-nerd ttf-jetbrains-mono ttf-ubuntu-font-family typescript \
+  tealdeer thunar thunar-volman thunar-media-tags-plugin thunar-archive-plugin tumbler tree-sitter-cli ttf-jetbrains-mono-nerd ttf-jetbrains-mono ttf-ubuntu-font-family typescript \
   unzip unrar upower \
   vulkan-tools vulkan-headers vulkan-validation-layers \
   wl-clipboard wf-recorder wget wireplumber \

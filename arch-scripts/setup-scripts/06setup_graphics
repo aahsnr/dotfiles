@@ -1,2 +1,2 @@
 #!/bin/bash
-yay -S --noconfirm libva-nvidia-driver nvidia-container-toolkit nvidia-open-dkms nvidia-utils opencl-nvidia ffnvcodec-headers
+yay -S --noconfirm libva-nvidia-driver nvidia-container-toolkit nvidia-dkms nvidia-utils opencl-nvidia ffnvcodec-headers
