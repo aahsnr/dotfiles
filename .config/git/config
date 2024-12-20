@@ -1,0 +1,60 @@
+[alias]
+	chore = "!f() { git commit -m \"chore($1): $2\"; }; f"
+	docs = "!f() { git commit -m \"docs($1): $2\"; }; f"
+	feat = "!f() { git commit -m \"feat($1): $2\"; }; f"
+	fix = "!f() { git commit -m \"fix($1): $2\"; }; f"
+	refactor = "!f() { git commit -m \"refactor($1): $2\"; }; f"
+	style = "!f() { git commit -m \"style($1): $2\"; }; f"
+	test = "!f() { git commit -m \"test($1): $2\"; }; f"
+
+[branch]
+	autosetupmerge = "true"
+
+[color]
+	ui = "auto"
+
+[commit]
+	gpgSign = true
+
+[credential]
+	helper = "/usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret"
+
+[filter "lfs"]
+	clean = "git-lfs clean -- %f"
+	process = "git-lfs filter-process --skip"
+	required = true
+	smudge = "git-lfs smudge --skip -- %f"
+
+[gpg]
+	program = gpg2 
+
+[init]
+	defaultBranch = "main"
+
+[merge]
+	conflictstyle = "diff3"
+	stat = "true"
+
+[pull]
+	ff = "only"
+
+[push]
+	autoSetupRemote = true
+	default = "current"
+	followTags = true
+
+[rebase]
+	autoSquash = true
+	autoStash = true
+
+[rerere]
+	autoupdate = true
+	enabled = true
+
+[tag]
+	gpgSign = true
+
+[user]
+	email = "ahsanur041@proton.me"
+	name = "aahsnr"
+	signingKey = "686487BCA6FB3E5B"
