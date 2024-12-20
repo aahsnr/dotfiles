@@ -1,6 +1,5 @@
 #!/bin/bash
 echo "Installing Hyprsunset"
-sleep 2
 sudo apt install -y hyprland-protocols
 cd && git clone --recurse-submodules https://github.com/hyprwm/hyprsunset.git
 cd hyprsunset
