@@ -6,6 +6,7 @@ bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprwayland-scanner && cd
 bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprpaper && cd
 bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprpicker && cd
 bash $HOME/.dots/ubuntu-scripts/source_builds/Hypridle && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprgraphics && cd
 bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprlock && cd
 bash $HOME/.dots/ubuntu-scripts/source_builds/Aquamarine && cd
 bash $HOME/.dots/ubuntu-scripts/source_builds/Xdg-desktop-portal-hyprland && cd

@@ -1,6 +1,6 @@
 #!/bin/bash
 sudo apt install -y flatpak
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 flatpak install flathub io.github.zen_browser.zen -y
 flatpak install flathub com.bitwarden.desktop -y

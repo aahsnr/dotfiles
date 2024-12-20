@@ -94,7 +94,7 @@ const options = mkOptions(OPTIONS, {
         tooltip: {
             scaling: opt(100),
         },
-        matugen: opt(false),
+        matugen: opt(true),
         matugen_settings: {
             mode: opt<MatugenTheme>('dark'),
             scheme_type: opt<MatugenScheme>('tonal-spot'),
@@ -103,8 +103,8 @@ const options = mkOptions(OPTIONS, {
         },
         font: {
             size: opt('1.2rem'),
-            name: opt('Ubuntu Nerd Font'),
-            weight: opt(600),
+            name: opt('JetBrainsMono Nerd Font'),
+            weight: opt(700),
         },
         notification: {
             scaling: opt(100),
@@ -873,7 +873,7 @@ const options = mkOptions(OPTIONS, {
     bar: {
         scrollSpeed: opt(5),
         layouts: opt<BarLayouts>({
-            '1': {
+            '0': {
                 left: ['dashboard', 'workspaces', 'windowtitle'],
                 middle: ['media'],
                 right: ['volume', 'clock', 'notifications'],
@@ -883,7 +883,7 @@ const options = mkOptions(OPTIONS, {
                 middle: ['media'],
                 right: ['volume', 'clock', 'notifications'],
             },
-            '0': {
+            '1': {
                 left: ['dashboard', 'workspaces', 'windowtitle'],
                 middle: ['media'],
                 right: ['volume', 'network', 'bluetooth', 'battery', 'systray', 'clock', 'notifications'],

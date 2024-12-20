@@ -1,0 +1,7 @@
+#!/bin/bash
+cd && git clone https://github.com/hyprwm/hyprland-qtutils.git
+cd hyprland-qtutils && git checkout v0.1.1
+cmake --no-warn-unused-cli -DCMAKE_INSTALL_PREFIX=/usr -S . -B ./build
+cmake --build ./build --config Release --target all
+sudo cmake --install build
+cd && sudo rm -rf hyprland-qtutils

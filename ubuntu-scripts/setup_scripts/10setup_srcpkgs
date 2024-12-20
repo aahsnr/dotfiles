@@ -18,5 +18,5 @@ bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprland-contrib && cd
 bash $HOME/.dots/ubuntu-scripts/source_builds/Hyprsunset && cd
 bash $HOME/.dots/ubuntu-scripts/source_builds/Neovim && cd
 bash $HOME/.dots/ubuntu-scripts/source_builds/Nwg-hello && cd
-#bash $HOME/.dots/ubuntu-scripts/source_builds/Rofi && cd
+bash $HOME/.dots/ubuntu-scripts/source_builds/Rofi && cd
 echo "Done building packages from source"

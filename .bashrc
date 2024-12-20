@@ -4,7 +4,7 @@
 source $HOME/.config/bash/debian.bash
 source $HOME/.config/bash/aliases.bash
 source $HOME/.config/bash/exports.bash
-source $HOME/.config/bash/pkgmaintain.bash
+#source $HOME/.config/bash/pkgmaintain.bash
 
 # If not running interactively, don't do anything
 case $- in
@@ -24,16 +24,12 @@ fi
 # colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# Added by `rbenv init` on Sat Nov 23 08:41:06 AM +06 2024
-eval "$(~/.dots/.rbenv/bin/rbenv init - --no-rehash bash)"
+eval "$(rbenv init - --no-rehash bash)"
 #eval "$(atuin init bash)"
 eval $(thefuck --alias FUCK)
 eval "$(zoxide init bash)"
-eval "$(direnv hook bash)"  
-source ~/.local/share/blesh/ble.sh
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-source ~/.local/share/blesh/ble.sh
-
-# Only load Liquid Prompt in interactive shells, not from a script or from scp
-#[[ $- = *i* ]] && source ~/.dots/liquidprompt/liquidprompt
+eval "$(direnv hook bash)"
+eval "$(starship init bash)"
+eval "$(fzf --bash)"
+source ~/.nix-profile/share/blesh/ble.sh
+. "$HOME/.cargo/env"

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-THEME='catppuccin-macchiato-flamingo-standard+default'
+THEME='catppuccin-macchiato-flamingo-standard'
 ICONS='Papirus-Dark'
 FONT='JetBrainsMono Nerd Font Medium 13'
 CURSOR='Bibata-Modern-Ice'
